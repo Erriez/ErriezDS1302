@@ -22,97 +22,97 @@
  * SOFTWARE.
  */
 
-/* DHT22 - AM2303 temperature and relative humidity sensor example for Arduino
- *
- * Required library:
- *   https://github.com/Erriez/ErriezDHT22
+/*!
+ * \file GettingStarted
+ * \brief DS1302 RTC getting started example for Arduino
+ * \details
+ *    Required library: https://github.com/Erriez/ErriezDS1302
  */
 
-#include <DHT22.h>
+#include <DS1302.h>
 
-// Connect DTH22 data pin to Arduino DIGITAL pin
-#define DHT22_PIN   2
+// Connect DS1302 data pin to Arduino DIGITAL pin
+#if defined(ARDUINO_ARCH_AVR)
+#define DS1302_CLK_PIN      2
+#define DS1302_IO_PIN       3
+#define DS1302_CE_PIN       4
+#elif defined(ARDUINO_ARCH_ESP8266)
+// Swap D2 and D4 pins for the ESP8266, because pin D2 is high during a
+// power-on / MCU reset / and flashing. This corrupts RTC registers.
+#define DS1302_CLK_PIN      D4 // Pin is high during power-on / reset / flashing
+#define DS1302_IO_PIN       D3
+#define DS1302_CE_PIN       D2
+#elif defined(ARDUINO_ARCH_ESP32)
+#define DS1302_CLK_PIN      0
+#define DS1302_IO_PIN       4
+#define DS1302_CE_PIN       5
+#else
+#error #error "May work, but not tested on this target"
+#endif
 
-// Create DHT22 sensor object
-DHT22 sensor = DHT22(DHT22_PIN);
+// Create DS1302 RTC object
+DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
-// Function prototypes
-void printTemperature(int16_t temperature);
-void printHumidity(int16_t humidity);
 
 void setup()
 {
-  // Initialize serial port
-  Serial.begin(115200);
-  Serial.println(F("DHT22 temperature and humidity sensor example\n"));
+    DS1302_DateTime dt;
+    bool running;
 
-  // Initialize sensor
-  sensor.begin();
+    // Initialize serial port
+    Serial.begin(115200);
+    while (!Serial) {
+        ;
+    }
+    Serial.println(F("DS1302 RTC getting started example\n"));
+
+    // Initialize RTC
+    running = rtc.begin();
+
+    // Set initial date and time
+    Serial.println(F("Set initial date time...\n"));
+
+    dt.second = 0;
+    dt.minute = 41;
+    dt.hour = 22;
+    dt.dayWeek = 6; // 1 = Monday
+    dt.dayMonth = 21;
+    dt.month = 4;
+    dt.year = 2018;
+    rtc.setDateTime(&dt);
+
+    // Check write protect state
+    if (rtc.isWriteProtected()) {
+        Serial.println(F("Error: DS1302 write protected"));
+        while (1) {
+            ;
+        }
+    }
+
+    // Check write protect state
+    if (rtc.isHalted()) {
+        Serial.println(F("Error: DS1302 halted"));
+        while (1) {
+            ;
+        }
+    }
+
+    Serial.println(F("Current date time:"));
 }
 
 void loop()
 {
-  // Check minimum interval of 2000 ms between sensor reads
-  if (sensor.available()) {
-    // Read temperature from sensor (blocking)
-    int16_t temperature = sensor.readTemperature();
+    DS1302_DateTime dt;
+    char buf[32];
 
-    // Read humidity from sensor (blocking)
-    int16_t humidity = sensor.readHumidity();
-
-    // Print temperature
-    printTemperature(temperature);
-
-    // Print humidity
-    printHumidity(humidity);
-  }
-}
-
-void printTemperature(int16_t temperature)
-{
-  // Check valid temperature value
-  if (temperature == ~0) {
-    // Temperature error (Check hardware connection)
-    Serial.println(F("Temperature: Error"));
-  } else {
-    // Print temperature
-    Serial.print(F("Temperature: "));
-    Serial.print(temperature / 10);
-    Serial.print(F("."));
-    Serial.print(temperature % 10);
-
-    // Print degree Celsius symbols
-    // Choose if (1) for normal or if (0) for extended ASCII degree symbol
-    if (1) {
-      // Print *C characters which are displayed correctly in the serial
-      // terminal of the Arduino IDE
-      Serial.println(F(" *C"));
+    // Get RTC date and time
+    if (!rtc.getDateTime(&dt)) {
+        Serial.println(F("Error: DS1302 read failed"));
     } else {
-      // Note: Extended characters are not supported in the Arduino IDE and
-      // displays ?C. This is displayed correctly with other serial terminals
-      // such as Tera Term.
-      // Degree symbol is ASCII code 248 (decimal).
-      char buf[4];
-      snprintf_P(buf, sizeof(buf), PSTR(" %cC"), 248);
-      Serial.println(buf);
+        snprintf(buf, sizeof(buf), "%d %02d-%02d-%d %d:%02d:%02d",
+                 dt.dayWeek, dt.dayMonth, dt.month, dt.year, dt.hour, dt.minute, dt.second);
+        Serial.println(buf);
     }
-  }
-}
 
-void printHumidity(int16_t humidity)
-{
-  // Check valid humidity value
-  if (humidity == ~0) {
-    // Humidity error (Check hardware connection)
-    Serial.println(F("Humidity: Error"));
-  } else {
-    // Print humidity
-    Serial.print(F("Humidity: "));
-    Serial.print(humidity / 10);
-    Serial.print(F("."));
-    Serial.print(humidity % 10);
-    Serial.println(F(" %"));
-  }
-
-  Serial.println();
+    delay(1000);
 }
