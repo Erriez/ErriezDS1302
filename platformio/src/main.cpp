@@ -57,7 +57,6 @@ DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 void setup()
 {
     DS1302_DateTime dt;
-    bool running;
 
     // Initialize serial port
     Serial.begin(115200);
@@ -67,7 +66,7 @@ void setup()
     Serial.println(F("DS1302 RTC getting started example\n"));
 
     // Initialize RTC
-    running = rtc.begin();
+    rtc.begin();
 
     // Set initial date and time
     Serial.println(F("Set initial date time...\n"));
