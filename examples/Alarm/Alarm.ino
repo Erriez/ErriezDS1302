@@ -80,8 +80,6 @@ Alarm alarms[] = {
 
 void setup()
 {
-    DS1302_DateTime dt;
-
     // Initialize serial port
     Serial.begin(115200);
     while (!Serial) {
