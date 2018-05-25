@@ -288,7 +288,7 @@ void DS1302::writeBufferRAM(uint8_t *buf, uint8_t len)
 {
     transferBegin();
     writeAddrCmd(DS1302_CMD_WRITE_RAM_BURST);
-    for (uint8_t i = 0; i < min(len, NUM_DS1302_RAM_REGS); i++) {
+    for (uint8_t i = 0; i < min((int)len, NUM_DS1302_RAM_REGS); i++) {
         writeByte(*buf++);
     }
     transferEnd();
@@ -324,7 +324,7 @@ void DS1302::readBufferRAM(uint8_t *buf, uint8_t len)
 {
     transferBegin();
     writeAddrCmd(DS1302_CMD_READ_RAM_BURST);
-    for (uint8_t i = 0; i < min(len, NUM_DS1302_RAM_REGS); i++) {
+    for (uint8_t i = 0; i < min((int)len, NUM_DS1302_RAM_REGS); i++) {
         *buf++ = readByte();
     }
     transferEnd();
