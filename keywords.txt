@@ -5,41 +5,41 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-DS1302				KEYWORD1
-DS1302_DateTime		KEYWORD1
-second				KEYWORD1
-minute				KEYWORD1
-hour				KEYWORD1
-dayWeek				KEYWORD1
-dayMonth			KEYWORD1
-month				KEYWORD1
-year				KEYWORD1
+DS1302	KEYWORD1
+DS1302_DateTime	KEYWORD1
+second	KEYWORD1
+minute	KEYWORD1
+hour	KEYWORD1
+dayWeek	KEYWORD1
+dayMonth	KEYWORD1
+month	KEYWORD1
+year	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-begin				KEYWORD2
-writeProtect		KEYWORD2
+begin	KEYWORD2
+writeProtect	KEYWORD2
 isWriteProtected	KEYWORD2
-halt				KEYWORD2
-isHalted			KEYWORD2
-setDateTime			KEYWORD2
-getDateTime			KEYWORD2
-setTime				KEYWORD2
-getTime				KEYWORD2
+halt	KEYWORD2
+isHalted	KEYWORD2
+setDateTime	KEYWORD2
+getDateTime	KEYWORD2
+setTime	KEYWORD2
+getTime	KEYWORD2
 writeClockRegister	KEYWORD2
 readClockRegister	KEYWORD2
-writeByteRAM		KEYWORD2
-writeBufferRAM		KEYWORD2
-readByteRAM			KEYWORD2
-readBufferRAM		KEYWORD2
+writeByteRAM	KEYWORD2
+writeBufferRAM	KEYWORD2
+readByteRAM	KEYWORD2
+readBufferRAM	KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)
 #######################################
-ds1302				KEYWORD1
-rtc					KEYWORD1
-dt					KEYWORD1
+ds1302	KEYWORD1
+rtc	KEYWORD1
+dt	KEYWORD1
 
 #######################################
 # Constants (LITERAL1)
