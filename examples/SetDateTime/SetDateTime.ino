@@ -91,7 +91,7 @@ void setup()
         }
     }
 
-    // Check write protect state
+    // Check running state
     if (rtc.isHalted()) {
         Serial.println(F("Error: DS1302 halted"));
         while (1) {
