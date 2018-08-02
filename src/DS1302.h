@@ -23,9 +23,11 @@
  */
 
 /*!
- * \brief DS1302 RTC library for Arduino
- * \details Source: https://github.com/Erriez/ErriezDS1302
  * \file DS1302.h
+ * \brief DS1302 RTC library for Arduino
+ * \details
+ *      Source:         https://github.com/Erriez/ErriezDS1302
+ *      Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
 #ifndef DS1302_H__

@@ -44,12 +44,13 @@ Arduino IDE | File | Examples | Erriez DS1302 RTC:
 - [SquareWave1Hz](https://github.com/Erriez/ErriezDS1302/blob/master/examples/SquareWave1Hz/SquareWave1Hz.ino): 1Hz square wave output on DIGITAL pin.
 - [Terminal](https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.ino) and [Python script](https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.py) to set date time.
 
-## Links
 
-- Library documentation [online](https://erriez.github.io/ErriezDS1302) or [PDF](https://github.com/Erriez/ErriezDS1302/raw/master/docs/latex/refman.pdf).
-- [More Libraries and Sketches from Erriez](https://github.com/Erriez/ErriezArduinoLibrariesAndSketches).
-- [Library installation instructions](https://github.com/Erriez/ErriezArduinoLibrariesAndSketches/wiki).
-- [DS1302 datasheet](https://www.google.com/search?q=DS1302+datasheet).
+## Documentation
+
+* [Online HTML](https://erriez.github.io/ErriezDS1302)
+* [Download PDF](https://github.com/Erriez/ErriezDS1302/raw/gh-pages/latex/ErriezDS1302.pdf).
+* [DS1302 datasheet](https://www.google.com/search?q=DS1302+datasheet).
+
 
 ## Usage
 
