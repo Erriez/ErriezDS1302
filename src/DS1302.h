@@ -140,25 +140,25 @@ class DS1302
 {
 public:
     explicit DS1302(uint8_t clkPin, uint8_t ioPin, uint8_t cePin);
-    bool begin();
+    virtual bool begin();
 
-    void writeProtect(bool enable);
-    bool isWriteProtected();
-    void halt(bool halt);
-    bool isHalted();
-    void setDateTime(DS1302_DateTime *dateTime);
-    bool getDateTime(DS1302_DateTime *dateTime);
-    void setTime(uint8_t hour, uint8_t minute, uint8_t second);
-    bool getTime(uint8_t *hour, uint8_t *minute, uint8_t *second);
+    virtual void writeProtect(bool enable);
+    virtual bool isWriteProtected();
+    virtual void halt(bool halt);
+    virtual bool isHalted();
+    virtual void setDateTime(DS1302_DateTime *dateTime);
+    virtual bool getDateTime(DS1302_DateTime *dateTime);
+    virtual void setTime(uint8_t hour, uint8_t minute, uint8_t second);
+    virtual bool getTime(uint8_t *hour, uint8_t *minute, uint8_t *second);
 
-    void writeClockRegister(uint8_t reg, uint8_t value);
-    uint8_t readClockRegister(uint8_t reg);
+    virtual void writeClockRegister(uint8_t reg, uint8_t value);
+    virtual uint8_t readClockRegister(uint8_t reg);
 
-    void writeByteRAM(uint8_t addr, uint8_t value);
-    void writeBufferRAM(uint8_t *buf, uint8_t len);
+    virtual void writeByteRAM(uint8_t addr, uint8_t value);
+    virtual void writeBufferRAM(uint8_t *buf, uint8_t len);
 
-    uint8_t readByteRAM(uint8_t addr);
-    void readBufferRAM(uint8_t *buf, uint8_t len);
+    virtual uint8_t readByteRAM(uint8_t addr);
+    virtual void readBufferRAM(uint8_t *buf, uint8_t len);
 
 protected:
 #ifdef __AVR
@@ -176,16 +176,16 @@ protected:
 #endif
 
     // RTC interface functions
-    void transferBegin();
-    void transferEnd();
-    void writeAddrCmd(uint8_t value);
-    void writeByte(uint8_t value);
-    uint8_t readByte();
-    void readBuffer(void *buf, uint8_t len);
+    virtual void transferBegin();
+    virtual void transferEnd();
+    virtual void writeAddrCmd(uint8_t value);
+    virtual void writeByte(uint8_t value);
+    virtual uint8_t readByte();
+    virtual void readBuffer(void *buf, uint8_t len);
 
     // BCD conversions
-    uint8_t bcdToDec(uint8_t bcd);
-    uint8_t decToBcd(uint8_t dec);
+    virtual uint8_t bcdToDec(uint8_t bcd);
+    virtual uint8_t decToBcd(uint8_t dec);
 };
 
 #endif // DS1302_H__
