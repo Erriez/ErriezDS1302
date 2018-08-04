@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ds1302_2eh',['DS1302.h',['../_d_s1302_8h.html',1,'']]]
+  ['erriezds1302_2eh',['ErriezDS1302.h',['../_erriez_d_s1302_8h.html',1,'']]]
 ];

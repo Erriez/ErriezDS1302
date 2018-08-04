@@ -1,0 +1,179 @@
+\hypertarget{_erriez_d_s1302_8h}{}\section{Erriez\+D\+S1302.\+h File Reference}
+\label{_erriez_d_s1302_8h}\index{Erriez\+D\+S1302.\+h@{Erriez\+D\+S1302.\+h}}
+
+
+\hyperlink{class_d_s1302}{D\+S1302} R\+TC library for Arduino.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_d_s1302___date_time}{D\+S1302\+\_\+\+Date\+Time}
+\begin{DoxyCompactList}\small\item\em Date time structure. \end{DoxyCompactList}\item 
+class \hyperlink{class_d_s1302}{D\+S1302}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} R\+TC class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB}~0x80
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} address/command register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_af485f398951fbc59758449c781f68f62}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+AM}~0x40\hypertarget{_erriez_d_s1302_8h_af485f398951fbc59758449c781f68f62}{}\label{_erriez_d_s1302_8h_af485f398951fbc59758449c781f68f62}
+
+\begin{DoxyCompactList}\small\item\em Address command R\+AM. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a1ccf2d2fc9a60901722c032c4596fed2}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+C\+L\+O\+CK}~0x00\hypertarget{_erriez_d_s1302_8h_a1ccf2d2fc9a60901722c032c4596fed2}{}\label{_erriez_d_s1302_8h_a1ccf2d2fc9a60901722c032c4596fed2}
+
+\begin{DoxyCompactList}\small\item\em Address command clock. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ab3fc3ff4f2c718a5b90cc0e0ba38b263}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+E\+AD}~0x01\hypertarget{_erriez_d_s1302_8h_ab3fc3ff4f2c718a5b90cc0e0ba38b263}{}\label{_erriez_d_s1302_8h_ab3fc3ff4f2c718a5b90cc0e0ba38b263}
+
+\begin{DoxyCompactList}\small\item\em Address command read. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a3a87988056dd4beb41658660714ad7f8}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+W\+R\+I\+TE}~0x00\hypertarget{_erriez_d_s1302_8h_a3a87988056dd4beb41658660714ad7f8}{}\label{_erriez_d_s1302_8h_a3a87988056dd4beb41658660714ad7f8}
+
+\begin{DoxyCompactList}\small\item\em Address command write. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a0065e37bae556b09cf34aac22358661e}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+R\+E\+A\+D\+\_\+\+C\+L\+O\+C\+K\+\_\+\+R\+EG}(reg)~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_a1ccf2d2fc9a60901722c032c4596fed2}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+C\+L\+O\+CK} $\vert$ (((reg) \& 0x1\+F) $<$$<$ 1) $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+E\+A\+D)\hypertarget{_erriez_d_s1302_8h_a0065e37bae556b09cf34aac22358661e}{}\label{_erriez_d_s1302_8h_a0065e37bae556b09cf34aac22358661e}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} read clock register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ab69db7c5560712cf52a8c3117adb23b4}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+L\+O\+C\+K\+\_\+\+R\+EG}(reg)~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_a1ccf2d2fc9a60901722c032c4596fed2}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+C\+L\+O\+CK} $\vert$ (((reg) \& 0x1\+F) $<$$<$ 1) $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+W\+R\+I\+T\+E)\hypertarget{_erriez_d_s1302_8h_ab69db7c5560712cf52a8c3117adb23b4}{}\label{_erriez_d_s1302_8h_ab69db7c5560712cf52a8c3117adb23b4}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} write clock register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ae50789535612abc96d3b9a67bf6ec960}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+R\+E\+A\+D\+\_\+\+C\+L\+O\+C\+K\+\_\+\+B\+U\+R\+ST}~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_a1ccf2d2fc9a60901722c032c4596fed2}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+C\+L\+O\+CK} $\vert$ 0x3\+E $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+E\+A\+D)\hypertarget{_erriez_d_s1302_8h_ae50789535612abc96d3b9a67bf6ec960}{}\label{_erriez_d_s1302_8h_ae50789535612abc96d3b9a67bf6ec960}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} read clock register with burst. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a5180d9b5ee38ccd136a4e9a5d82597c3}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+L\+O\+C\+K\+\_\+\+B\+U\+R\+ST}~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_a1ccf2d2fc9a60901722c032c4596fed2}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+C\+L\+O\+CK} $\vert$ 0x3\+E $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+W\+R\+I\+T\+E)\hypertarget{_erriez_d_s1302_8h_a5180d9b5ee38ccd136a4e9a5d82597c3}{}\label{_erriez_d_s1302_8h_a5180d9b5ee38ccd136a4e9a5d82597c3}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} writeclock register with burst. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_af293d5d34a6a2dd93074cc926b47ae07}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+R\+E\+A\+D\+\_\+\+R\+AM}(addr)          ~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_af485f398951fbc59758449c781f68f62}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+AM} $\vert$ (((addr) \& 0x1\+F) $<$$<$ 1) $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+E\+A\+D)\hypertarget{_erriez_d_s1302_8h_af293d5d34a6a2dd93074cc926b47ae07}{}\label{_erriez_d_s1302_8h_af293d5d34a6a2dd93074cc926b47ae07}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} read R\+AM register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a5be339b822ecb30236752d3f5b9fbac0}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+R\+AM}(addr)        ~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_af485f398951fbc59758449c781f68f62}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+AM} $\vert$ (((addr) \& 0x1\+F) $<$$<$ 1) $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+W\+R\+I\+T\+E)\hypertarget{_erriez_d_s1302_8h_a5be339b822ecb30236752d3f5b9fbac0}{}\label{_erriez_d_s1302_8h_a5be339b822ecb30236752d3f5b9fbac0}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} write R\+AM register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a941ca3f77348cf68c4ee70970e99f7ae}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+R\+E\+A\+D\+\_\+\+R\+A\+M\+\_\+\+B\+U\+R\+ST}~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_af485f398951fbc59758449c781f68f62}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+AM} $\vert$ 0x3\+E $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+E\+A\+D)\hypertarget{_erriez_d_s1302_8h_a941ca3f77348cf68c4ee70970e99f7ae}{}\label{_erriez_d_s1302_8h_a941ca3f77348cf68c4ee70970e99f7ae}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} read R\+AM register with burst. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ac6f1e158cdc535d852553125c14ba535}{D\+S1302\+\_\+\+C\+M\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+R\+A\+M\+\_\+\+B\+U\+R\+ST}~(\hyperlink{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{D\+S1302\+\_\+\+A\+CB} $\vert$ \hyperlink{_erriez_d_s1302_8h_af485f398951fbc59758449c781f68f62}{D\+S1302\+\_\+\+A\+C\+B\+\_\+\+R\+AM} $\vert$ 0x3\+E $\vert$ D\+S1302\+\_\+\+A\+C\+B\+\_\+\+W\+R\+I\+T\+E)\hypertarget{_erriez_d_s1302_8h_ac6f1e158cdc535d852553125c14ba535}{}\label{_erriez_d_s1302_8h_ac6f1e158cdc535d852553125c14ba535}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} write R\+AM register with burst. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ad90def0d6680961a3ecfa479da93c8a6}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+S\+E\+C\+O\+N\+DS}~0x00
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} registers. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_afba5b39f9d6752d2dea278a6092652a4}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+M\+I\+N\+U\+T\+ES}~0x01\hypertarget{_erriez_d_s1302_8h_afba5b39f9d6752d2dea278a6092652a4}{}\label{_erriez_d_s1302_8h_afba5b39f9d6752d2dea278a6092652a4}
+
+\begin{DoxyCompactList}\small\item\em Minutes register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ae935ed90e219d2ec923f86b1c1fc82c3}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+H\+O\+U\+RS}~0x02\hypertarget{_erriez_d_s1302_8h_ae935ed90e219d2ec923f86b1c1fc82c3}{}\label{_erriez_d_s1302_8h_ae935ed90e219d2ec923f86b1c1fc82c3}
+
+\begin{DoxyCompactList}\small\item\em Hours register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a9b47355eeaf937ffd85c3e1af8df75de}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+D\+A\+Y\+\_\+\+M\+O\+N\+TH}~0x03\hypertarget{_erriez_d_s1302_8h_a9b47355eeaf937ffd85c3e1af8df75de}{}\label{_erriez_d_s1302_8h_a9b47355eeaf937ffd85c3e1af8df75de}
+
+\begin{DoxyCompactList}\small\item\em Day of the month register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ae3e359527832e35f1af30225ead4d9dc}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+M\+O\+N\+TH}~0x04\hypertarget{_erriez_d_s1302_8h_ae3e359527832e35f1af30225ead4d9dc}{}\label{_erriez_d_s1302_8h_ae3e359527832e35f1af30225ead4d9dc}
+
+\begin{DoxyCompactList}\small\item\em Month register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a2da880f573eb735e903f9af11384bf25}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+D\+A\+Y\+\_\+\+W\+E\+EK}~0x05\hypertarget{_erriez_d_s1302_8h_a2da880f573eb735e903f9af11384bf25}{}\label{_erriez_d_s1302_8h_a2da880f573eb735e903f9af11384bf25}
+
+\begin{DoxyCompactList}\small\item\em Day of the week register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a2e477abad698a9759156d26b42ec2540}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+Y\+E\+AR}~0x06\hypertarget{_erriez_d_s1302_8h_a2e477abad698a9759156d26b42ec2540}{}\label{_erriez_d_s1302_8h_a2e477abad698a9759156d26b42ec2540}
+
+\begin{DoxyCompactList}\small\item\em Year register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a725b6ced0d0196edd4823f01c97d65d9}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+WP}~0x07\hypertarget{_erriez_d_s1302_8h_a725b6ced0d0196edd4823f01c97d65d9}{}\label{_erriez_d_s1302_8h_a725b6ced0d0196edd4823f01c97d65d9}
+
+\begin{DoxyCompactList}\small\item\em Write protect register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a8bf70caf0ae83ebcaa403985baca25ac}{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+TC}~0x08\hypertarget{_erriez_d_s1302_8h_a8bf70caf0ae83ebcaa403985baca25ac}{}\label{_erriez_d_s1302_8h_a8bf70caf0ae83ebcaa403985baca25ac}
+
+\begin{DoxyCompactList}\small\item\em Tickle Charger register. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ad9d934880f3379334d3e8659852f21ad}{N\+U\+M\+\_\+\+D\+S1302\+\_\+\+R\+A\+M\+\_\+\+R\+E\+GS}~31\hypertarget{_erriez_d_s1302_8h_ad9d934880f3379334d3e8659852f21ad}{}\label{_erriez_d_s1302_8h_ad9d934880f3379334d3e8659852f21ad}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} number of R\+AM registers. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a2557fffeeee25e37869fe980bdc79c14}{D\+S1302\+\_\+\+B\+I\+T\+\_\+\+CH}~7
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_d_s1302}{D\+S1302} register bit defines. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a4ebfcf5997c8387152ad790277bdc8b7}{D\+S1302\+\_\+\+B\+I\+T\+\_\+\+WP}~7\hypertarget{_erriez_d_s1302_8h_a4ebfcf5997c8387152ad790277bdc8b7}{}\label{_erriez_d_s1302_8h_a4ebfcf5997c8387152ad790277bdc8b7}
+
+\begin{DoxyCompactList}\small\item\em Write protect bit. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_acdb7ac544a140f27b5f7deb0be22e449}{D\+S1302\+\_\+\+B\+I\+T\+\_\+\+R\+E\+AD}~0\hypertarget{_erriez_d_s1302_8h_acdb7ac544a140f27b5f7deb0be22e449}{}\label{_erriez_d_s1302_8h_acdb7ac544a140f27b5f7deb0be22e449}
+
+\begin{DoxyCompactList}\small\item\em Bit read. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a37d3f4ea25589d2b1d273e7fce5336c1}{D\+S1302\+\_\+\+T\+C\+S\+\_\+\+D\+I\+S\+A\+B\+LE}~0x5C\hypertarget{_erriez_d_s1302_8h_a37d3f4ea25589d2b1d273e7fce5336c1}{}\label{_erriez_d_s1302_8h_a37d3f4ea25589d2b1d273e7fce5336c1}
+
+\begin{DoxyCompactList}\small\item\em Tickle Charger disable value. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a697df0d8e3009ad377976ee6613f1b45}{D\+S1302\+\_\+\+C\+L\+K\+\_\+\+L\+OW}()            ~\{ digital\+Write(\+\_\+clk\+Pin, L\+OW); \}\hypertarget{_erriez_d_s1302_8h_a697df0d8e3009ad377976ee6613f1b45}{}\label{_erriez_d_s1302_8h_a697df0d8e3009ad377976ee6613f1b45}
+
+\begin{DoxyCompactList}\small\item\em C\+LK pin low. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_acf0209c699c03c8f540398d24f06bac8}{D\+S1302\+\_\+\+C\+L\+K\+\_\+\+H\+I\+GH}()          ~\{ digital\+Write(\+\_\+clk\+Pin, H\+I\+GH); \}\hypertarget{_erriez_d_s1302_8h_acf0209c699c03c8f540398d24f06bac8}{}\label{_erriez_d_s1302_8h_acf0209c699c03c8f540398d24f06bac8}
+
+\begin{DoxyCompactList}\small\item\em C\+LK pin high. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a8df7794d14f7b65b03e956be9b599228}{D\+S1302\+\_\+\+C\+L\+K\+\_\+\+I\+N\+P\+UT}()        ~\{ pin\+Mode(\+\_\+clk\+Pin, I\+N\+P\+UT); \}\hypertarget{_erriez_d_s1302_8h_a8df7794d14f7b65b03e956be9b599228}{}\label{_erriez_d_s1302_8h_a8df7794d14f7b65b03e956be9b599228}
+
+\begin{DoxyCompactList}\small\item\em C\+LK pin input. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a9959519149349e6e4ed5b4f10114b895}{D\+S1302\+\_\+\+C\+L\+K\+\_\+\+O\+U\+T\+P\+UT}()      ~\{ pin\+Mode(\+\_\+clk\+Pin, O\+U\+T\+P\+UT); \}\hypertarget{_erriez_d_s1302_8h_a9959519149349e6e4ed5b4f10114b895}{}\label{_erriez_d_s1302_8h_a9959519149349e6e4ed5b4f10114b895}
+
+\begin{DoxyCompactList}\small\item\em C\+LK pin output. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ae88528016f1b06474a1a29249a9558cb}{D\+S1302\+\_\+\+I\+O\+\_\+\+L\+OW}()            ~\{ digital\+Write(\+\_\+io\+Pin, L\+OW); \}\hypertarget{_erriez_d_s1302_8h_ae88528016f1b06474a1a29249a9558cb}{}\label{_erriez_d_s1302_8h_ae88528016f1b06474a1a29249a9558cb}
+
+\begin{DoxyCompactList}\small\item\em IO pin low. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a78ecbf638f7027c798692198ba790311}{D\+S1302\+\_\+\+I\+O\+\_\+\+H\+I\+GH}()          ~\{ digital\+Write(\+\_\+io\+Pin, H\+I\+GH); \}\hypertarget{_erriez_d_s1302_8h_a78ecbf638f7027c798692198ba790311}{}\label{_erriez_d_s1302_8h_a78ecbf638f7027c798692198ba790311}
+
+\begin{DoxyCompactList}\small\item\em IO pin high. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a48451801e2cb52eaf53603693cdbc825}{D\+S1302\+\_\+\+I\+O\+\_\+\+I\+N\+P\+UT}()        ~\{ pin\+Mode(\+\_\+io\+Pin, I\+N\+P\+UT); \}\hypertarget{_erriez_d_s1302_8h_a48451801e2cb52eaf53603693cdbc825}{}\label{_erriez_d_s1302_8h_a48451801e2cb52eaf53603693cdbc825}
+
+\begin{DoxyCompactList}\small\item\em IO pin input. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_abf9a7556fd7dba843ac7a9fcdd372aa8}{D\+S1302\+\_\+\+I\+O\+\_\+\+O\+U\+T\+P\+UT}()      ~\{ pin\+Mode(\+\_\+io\+Pin, O\+U\+T\+P\+UT); \}\hypertarget{_erriez_d_s1302_8h_abf9a7556fd7dba843ac7a9fcdd372aa8}{}\label{_erriez_d_s1302_8h_abf9a7556fd7dba843ac7a9fcdd372aa8}
+
+\begin{DoxyCompactList}\small\item\em IO pin output. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_adbf141881001ba74d0089e53a3b4cb87}{D\+S1302\+\_\+\+I\+O\+\_\+\+R\+E\+AD}()          ~( digital\+Read(\+\_\+io\+Pin) )\hypertarget{_erriez_d_s1302_8h_adbf141881001ba74d0089e53a3b4cb87}{}\label{_erriez_d_s1302_8h_adbf141881001ba74d0089e53a3b4cb87}
+
+\begin{DoxyCompactList}\small\item\em IO pin read. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a125636b80b4ed65f80f3f77a24388ee6}{D\+S1302\+\_\+\+C\+E\+\_\+\+L\+OW}()            ~\{ digital\+Write(\+\_\+ce\+Pin, L\+OW); \}\hypertarget{_erriez_d_s1302_8h_a125636b80b4ed65f80f3f77a24388ee6}{}\label{_erriez_d_s1302_8h_a125636b80b4ed65f80f3f77a24388ee6}
+
+\begin{DoxyCompactList}\small\item\em CE pin low. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ab255655e1068c8704bba6581e9dd88c5}{D\+S1302\+\_\+\+C\+E\+\_\+\+H\+I\+GH}()          ~\{ digital\+Write(\+\_\+ce\+Pin, H\+I\+GH); \}\hypertarget{_erriez_d_s1302_8h_ab255655e1068c8704bba6581e9dd88c5}{}\label{_erriez_d_s1302_8h_ab255655e1068c8704bba6581e9dd88c5}
+
+\begin{DoxyCompactList}\small\item\em CE pin high. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a9916eae33eebf4d9b4aba314d6ed1593}{D\+S1302\+\_\+\+C\+E\+\_\+\+I\+N\+P\+UT}()        ~\{ pin\+Mode(\+\_\+ce\+Pin, I\+N\+P\+UT); \}\hypertarget{_erriez_d_s1302_8h_a9916eae33eebf4d9b4aba314d6ed1593}{}\label{_erriez_d_s1302_8h_a9916eae33eebf4d9b4aba314d6ed1593}
+
+\begin{DoxyCompactList}\small\item\em CE pin input. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_ad2340346ccd422202a14f6133316ebce}{D\+S1302\+\_\+\+C\+E\+\_\+\+O\+U\+T\+P\+UT}()      ~\{ pin\+Mode(\+\_\+ce\+Pin, O\+U\+T\+P\+UT); \}\hypertarget{_erriez_d_s1302_8h_ad2340346ccd422202a14f6133316ebce}{}\label{_erriez_d_s1302_8h_ad2340346ccd422202a14f6133316ebce}
+
+\begin{DoxyCompactList}\small\item\em CE pin output. \end{DoxyCompactList}\item 
+\#define \hyperlink{_erriez_d_s1302_8h_a61e6a0f1caacb218e7cbff1c6673e4b9}{D\+S1302\+\_\+\+P\+I\+N\+\_\+\+D\+E\+L\+AY}()                                                                                \hypertarget{_erriez_d_s1302_8h_a61e6a0f1caacb218e7cbff1c6673e4b9}{}\label{_erriez_d_s1302_8h_a61e6a0f1caacb218e7cbff1c6673e4b9}
+
+\begin{DoxyCompactList}\small\item\em Delay between pin changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_s1302}{D\+S1302} R\+TC library for Arduino. 
+
+Source\+: \href{https://github.com/Erriez/ErriezDS1302}{\tt https\+://github.\+com/\+Erriez/\+Erriez\+D\+S1302} Documentation\+: \href{https://erriez.github.io/ErriezDS1302}{\tt https\+://erriez.\+github.\+io/\+Erriez\+D\+S1302} 
+
+\subsection{Macro Definition Documentation}
+\index{Erriez\+D\+S1302.\+h@{Erriez\+D\+S1302.\+h}!D\+S1302\+\_\+\+A\+CB@{D\+S1302\+\_\+\+A\+CB}}
+\index{D\+S1302\+\_\+\+A\+CB@{D\+S1302\+\_\+\+A\+CB}!Erriez\+D\+S1302.\+h@{Erriez\+D\+S1302.\+h}}
+\subsubsection[{\texorpdfstring{D\+S1302\+\_\+\+A\+CB}{DS1302_ACB}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+S1302\+\_\+\+A\+CB~0x80}\hypertarget{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}{}\label{_erriez_d_s1302_8h_a13c23218f58fa87717c3b0f23cbdefe7}
+
+
+\hyperlink{class_d_s1302}{D\+S1302} address/command register. 
+
+Address command date/time 
+
+Definition at line 39 of file Erriez\+D\+S1302.\+h.
+
+\index{Erriez\+D\+S1302.\+h@{Erriez\+D\+S1302.\+h}!D\+S1302\+\_\+\+B\+I\+T\+\_\+\+CH@{D\+S1302\+\_\+\+B\+I\+T\+\_\+\+CH}}
+\index{D\+S1302\+\_\+\+B\+I\+T\+\_\+\+CH@{D\+S1302\+\_\+\+B\+I\+T\+\_\+\+CH}!Erriez\+D\+S1302.\+h@{Erriez\+D\+S1302.\+h}}
+\subsubsection[{\texorpdfstring{D\+S1302\+\_\+\+B\+I\+T\+\_\+\+CH}{DS1302_BIT_CH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+S1302\+\_\+\+B\+I\+T\+\_\+\+CH~7}\hypertarget{_erriez_d_s1302_8h_a2557fffeeee25e37869fe980bdc79c14}{}\label{_erriez_d_s1302_8h_a2557fffeeee25e37869fe980bdc79c14}
+
+
+\hyperlink{class_d_s1302}{D\+S1302} register bit defines. 
+
+Clock halt bit 
+
+Definition at line 77 of file Erriez\+D\+S1302.\+h.
+
+\index{Erriez\+D\+S1302.\+h@{Erriez\+D\+S1302.\+h}!D\+S1302\+\_\+\+R\+E\+G\+\_\+\+S\+E\+C\+O\+N\+DS@{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+S\+E\+C\+O\+N\+DS}}
+\index{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+S\+E\+C\+O\+N\+DS@{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+S\+E\+C\+O\+N\+DS}!Erriez\+D\+S1302.\+h@{Erriez\+D\+S1302.\+h}}
+\subsubsection[{\texorpdfstring{D\+S1302\+\_\+\+R\+E\+G\+\_\+\+S\+E\+C\+O\+N\+DS}{DS1302_REG_SECONDS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+S1302\+\_\+\+R\+E\+G\+\_\+\+S\+E\+C\+O\+N\+DS~0x00}\hypertarget{_erriez_d_s1302_8h_ad90def0d6680961a3ecfa479da93c8a6}{}\label{_erriez_d_s1302_8h_ad90def0d6680961a3ecfa479da93c8a6}
+
+
+\hyperlink{class_d_s1302}{D\+S1302} registers. 
+
+Seconds register 
+
+Definition at line 63 of file Erriez\+D\+S1302.\+h.
+

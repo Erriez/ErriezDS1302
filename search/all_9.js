@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['second',['second',['../struct_d_s1302___date_time.html#a13577ffb4c390f4873bea7d58eef10e8',1,'DS1302_DateTime']]],
-  ['setdatetime',['setDateTime',['../class_d_s1302.html#af947e2773a2c049ff9c1ca975c4f00a0',1,'DS1302']]],
-  ['settime',['setTime',['../class_d_s1302.html#aca174e400c6288e75a13373e39cb74e2',1,'DS1302']]]
+  ['readbuffer',['readBuffer',['../class_d_s1302.html#ae21054c896c91e8b92496945ad50d930',1,'DS1302']]],
+  ['readbufferram',['readBufferRAM',['../class_d_s1302.html#a78b90f6f87fde5258d71fc0d56f7abc7',1,'DS1302']]],
+  ['readbyte',['readByte',['../class_d_s1302.html#aa505de55e1cd5605417de24917d820d5',1,'DS1302']]],
+  ['readbyteram',['readByteRAM',['../class_d_s1302.html#adfd2a9c599d90e2c3484d6507831fce3',1,'DS1302']]],
+  ['readclockregister',['readClockRegister',['../class_d_s1302.html#a8856bd9b089bc6aec65033b48c3a5688',1,'DS1302']]]
 ];

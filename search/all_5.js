@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ishalted',['isHalted',['../class_d_s1302.html#a7a11050b7379f8d23083fec59f5f7d50',1,'DS1302']]],
-  ['iswriteprotected',['isWriteProtected',['../class_d_s1302.html#a72edd217b42eb23576e6d63c8a560f17',1,'DS1302']]]
+  ['halt',['halt',['../class_d_s1302.html#a7d397e8c06e3f11c0b975c4157a14bdf',1,'DS1302']]],
+  ['hour',['hour',['../struct_d_s1302___date_time.html#aea287766c87d50712a3e87c6c11955a8',1,'DS1302_DateTime']]]
 ];
