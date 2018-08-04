@@ -29,8 +29,8 @@
  *   https://github.com/Erriez/ErriezTimestamp
  */
 
-#include <DS1302.h>
-#include <Timestamp.h>
+#include <ErriezDS1302.h>
+#include <ErriezTimestamp.h>
 
 // Connect DS1302 data pin to Arduino DIGITAL pin
 #if defined(ARDUINO_ARCH_AVR)

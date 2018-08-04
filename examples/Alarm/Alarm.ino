@@ -28,9 +28,9 @@
  *   https://github.com/Erriez/ErriezDS1302
  */
 
-#include <DS1302.h>
+#include <ErriezDS1302.h>
+#include "ErriezDS1302_Alarm.h"
 
-#include "DS1302_Alarm.h"
 
 // Connect DS1302 data pin to Arduino DIGITAL pin
 #if defined(ARDUINO_ARCH_AVR)

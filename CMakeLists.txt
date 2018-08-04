@@ -57,9 +57,9 @@ include_directories(${LIB_SRC_DIR})
 generate_arduino_library(
         ${PROJECT_NAME}Lib
         SRCS
-            ${LIB_SRC_DIR}/DS1302.cpp
+            ${LIB_SRC_DIR}/ErriezDS1302.cpp
         HDRS
-            ${LIB_SRC_DIR}/DS1302.h
+            ${LIB_SRC_DIR}/ErriezDS1302.h
 )
 
 # Configure project

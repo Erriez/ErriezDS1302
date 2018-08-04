@@ -23,15 +23,15 @@
  */
 
 /*!
- * \file DS1302.h
+ * \file ErriezDS1302.h
  * \brief DS1302 RTC library for Arduino
  * \details
  *      Source:         https://github.com/Erriez/ErriezDS1302
  *      Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
-#ifndef DS1302_H__
-#define DS1302_H__
+#ifndef ERRIEZ_DS1302_H_
+#define ERRIEZ_DS1302_H_
 
 #include <Arduino.h>
 
@@ -188,4 +188,4 @@ protected:
     virtual uint8_t decToBcd(uint8_t dec);
 };
 
-#endif // DS1302_H__
+#endif // ERRIEZ_DS1302_H_

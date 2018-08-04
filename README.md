@@ -57,7 +57,7 @@ Arduino IDE | File | Examples | Erriez DS1302 RTC:
 **Initialization**
 
 ```c++
-#include <DS1302.h>
+#include <ErriezDS1302.h>
 
 // Connect DS1302 data pin to Arduino DIGITAL pin
 #if defined(ARDUINO_ARCH_AVR)

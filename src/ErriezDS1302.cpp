@@ -23,14 +23,14 @@
  */
 
 /*!
- * \file DS1302.h
+ * \file ErriezDS1302.h
  * \brief DS1302 RTC library for Arduino
  * \details
  *      Source:         https://github.com/Erriez/ErriezDS1302
  *      Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
-#include "DS1302.h"
+#include "ErriezDS1302.h"
 
 /*!
  * \brief Constructor DS1302 RTC.
