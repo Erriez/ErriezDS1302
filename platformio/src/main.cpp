@@ -23,7 +23,6 @@
  */
 
 /*!
- * \file GettingStarted
  * \brief DS1302 RTC getting started example for Arduino
  * \details
  *    Required library: https://github.com/Erriez/ErriezDS1302
