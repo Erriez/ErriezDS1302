@@ -48,7 +48,7 @@ Arduino IDE | File | Examples | Erriez DS1302 RTC:
 ## Documentation
 
 * [Online HTML](https://erriez.github.io/ErriezDS1302)
-* [Download PDF](https://github.com/Erriez/ErriezDS1302/raw/gh-pages/latex/ErriezDS1302.pdf).
+* [Download PDF](https://github.com/Erriez/ErriezDS1302/raw/master/ErriezDS1302.pdf).
 * [DS1302 datasheet](https://www.google.com/search?q=DS1302+datasheet).
 
 
