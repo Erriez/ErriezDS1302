@@ -17,6 +17,9 @@ function autobuild()
     BOARDS_AVR="--board uno --board micro --board miniatmega328 --board nanoatmega328new --board pro16MHzatmega328 --board pro8MHzatmega328 --board megaatmega2560 --board leonardo"
     BOARDS_ESP="--board d1_mini --board nodemcuv2 --board lolin_d32"
 
+    echo "Installing library dependencies"
+    platformio lib --global install https://github.com/Erriez/ErriezTimestamp.git
+
     echo "Building examples..."
     platformio ci --lib="examples/Alarm" --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/Alarm/Alarm.ino
     platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/Benchmark/Benchmark.ino
