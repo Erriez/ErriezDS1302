@@ -21,14 +21,14 @@ function autobuild()
     platformio lib --global install https://github.com/Erriez/ErriezTimestamp.git
 
     echo "Building examples..."
-    platformio ci --lib="examples/Alarm" --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/Alarm/Alarm.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/Benchmark/Benchmark.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/GettingStarted/GettingStarted.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/PrintDateTime/PrintDateTime.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/RAM/RAM.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/SetTrickleCharger/SetTrickleCharger.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/SquareWave1Hz/SquareWave1Hz.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/Terminal/Terminal.ino
+    platformio ci --lib="examples/ErriezDS1302Alarm" --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezDS1302Alarm/ErriezDS1302Alarm.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/ErriezDS1302Benchmark/ErriezDS1302Benchmark.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/ErriezDS1302DateStrings/ErriezDS1302DateStrings.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/ErriezDS1302RAM/ErriezDS1302RAM.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/ErriezDS1302SetDateTime/ErriezDS1302SetDateTime.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/ErriezDS1302SetTrickleCharger/ErriezDS1302SetTrickleCharger.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/ErriezDS1302Terminal/ErriezDS1302Terminal.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ESP} examples/ErriezDS1302Test/ErriezDS1302Test.ino
 }
 
 function generate_doxygen()

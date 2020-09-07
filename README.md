@@ -2,25 +2,20 @@
 
 [![Build Status](https://travis-ci.org/Erriez/ErriezDS1302.svg?branch=master)](https://travis-ci.org/Erriez/ErriezDS1302)
 
-This is an optimized 3-wire DS1302 RTC (Real Time Clock) library for Arduino.
+This is a 3-wire DS1302 RTC (Real Time Clock) library for Arduino.
 
 ![DS1302 RTC](https://raw.githubusercontent.com/Erriez/DS1302/master/extras/DS1302.png)
 
 ## Library features
 
-- Read / write RTC date and time.
+- libc `<time.h>` compatible
+- Read/write date/time `struct tm`
+- Set/get Unix epoch UTC `time_t`
+- Set/get time (hours, minutes, seconds)
+- Set date and time
 - Read / write 31 Bytes battery backupped RTC RAM.
 - Programmable trickle charge to charge super-caps / lithium batteries.
 - Optimized IO interface for Atmel AVR platform.
-- Tested on platforms: 
-  - 8-bit Atmel AVR ([Arduino UNO](https://store.arduino.cc/arduino-uno-rev3) / [Nano](https://store.arduino.cc/arduino-nano) / [Mini](https://store.arduino.cc/arduino-mini-05) / [Micro](https://store.arduino.cc/arduino-micro) / [Leonardo](https://store.arduino.cc/arduino-leonardo-with-headers) / [Mega2560](https://store.arduino.cc/arduino-mega-2560-rev3))
-  - 32-bit ESP8266 ([WeMos D1 & R2](https://www.google.com/search?q=wemos+d1+r2&tbm=isch) / [Node MCU ESP12E](https://www.google.com/search?q=geekcreit+esp12e+devkit+v2&tbm=isch))
-  - 32-bit ESP32 ([WeMos LOLIN32 + OLED](https://www.google.com/search?q=wemos+lolin32+oled&tbm=isch))
-- Supported IDE's:
-  - [Arduino IDE](https://www.arduino.cc/en/Main/Software) (v1.8.5)
-  - [CLion](https://www.jetbrains.com/clion/download) (2018.1)
-  - [Atom](https://atom.io/) / [PlatformIO](https://platformio.org/) with CI (Continuous Integration)
-  - [Atmel Studio](https://www.microchip.com/mplab/avr-support/atmel-studio-7) (7.0)
 
 ## DS1302 specifications
 
@@ -34,22 +29,22 @@ This is an optimized 3-wire DS1302 RTC (Real Time Clock) library for Arduino.
 
 Arduino IDE | File | Examples | Erriez DS1302 RTC:
 
-- [Alarm](https://github.com/Erriez/ErriezDS1302/blob/master/examples/Alarm/Alarm.ino): Program one or more alarms.
-- [Benchmark](https://github.com/Erriez/ErriezDS1302/blob/master/examples/Benchmark/Benchmark.ino): Benchmark library.
-- [GettingStarted](https://github.com/Erriez/ErriezDS1302/blob/master/examples/GettingStarted/GettingStarted.ino): Getting started example.
-- [PrintDateTime](https://github.com/Erriez/ErriezDS1302/blob/master/examples/PrintDateTime/PrintDateTime.ino): Print date and time with PROGMEM strings.
-- [RAM](https://github.com/Erriez/ErriezDS1302/blob/master/examples/RAM/RAM.ino): Read/write RTC RAM.
-- [SetDateTime](https://github.com/Erriez/ErriezDS1302/blob/master/examples/SetDateTime/SetDateTime.ino): Set date time.
-- [SetTrickleCharger](https://github.com/Erriez/ErriezDS1302/blob/master/examples/SetTrickleCharger/SetTrickleCharger.ino): Program trickle battery/capacitor charger.
-- [SquareWave1Hz](https://github.com/Erriez/ErriezDS1302/blob/master/examples/SquareWave1Hz/SquareWave1Hz.ino): 1Hz square wave output on DIGITAL pin.
-- [Terminal](https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.ino) and [Python script](https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.py) to set date time.
+- [Alarm](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Alarm/ErriezDS1302Alarm.ino): Program one or more software alarms.
+- [Benchmark](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Benchmark/ErriezDS1302Benchmark.ino): Benchmark library.
+- [GettingStarted](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302DateStrings/ErriezDS1302DateStrings.ino): Date strings in flash example.
+- [RAM](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302RAM/ErriezDS1302RAM.ino): Read/write RTC RAM.
+- [Read](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Read/ErriezDS1302Read.ino) Read example.
+- [SetDateTime](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetDateTime/ErriezDS1302SetDateTime.ino): Set date time.
+- [SetTrickleCharger](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetTrickleCharger/ErriezDS1302SetTrickleCharger.ino): Program trickle battery/capacitor charger.
+- [Terminal](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.ino) and [Python script](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.py) to set date time.
+- [Test](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Test/ErriezDS1302Test.ino): Regression test.
 
 
 ## Documentation
 
 * [Online HTML](https://erriez.github.io/ErriezDS1302)
-* [Download PDF](https://github.com/Erriez/ErriezDS1302/raw/master/ErriezDS1302.pdf).
-* [DS1302 datasheet](https://www.google.com/search?q=DS1302+datasheet).
+* [Doxygen PDF](https://github.com/Erriez/ErriezDS1302/blob/master/ErriezDS1302.pdf)
+* [DS1307 datasheet](https://github.com/Erriez/ErriezDS1302/blob/master/extras/DS1302.pdf)
 
 
 ## Usage
@@ -77,54 +72,36 @@ Arduino IDE | File | Examples | Erriez DS1302 RTC:
 #endif
 
 // Create DS1302 RTC object
-DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 void setup()
 {
-    bool running;
-    
     // Initialize RTC
-    running = rtc.begin();
+    while (!ds1302.begin()) {
+        Serial.println(F("Error: DS1302 not found"));
+        delay(3000);
+    }
 }
 ```
 
-**Set date and time**
-
-```C++
-DS1302_DateTime dt;
-    
-// Set initial date and time
-dt.second = 0;
-dt.minute = 41;
-dt.hour = 22;
-dt.dayWeek = 6; // 1 = Monday
-dt.dayMonth = 21;
-dt.month = 4;
-dt.year = 2018;
-rtc.setDateTime(&dt);
-```
-
-**Get date and time**
+**Check oscillator status at startup**
 
 ```c++
-DS1302_DateTime dt;
-char buf[32];
-
-// Get RTC date and time
-if (!rtc.getDateTime(&dt)) {
-    Serial.println(F("Error: DS1302 read failed"));
-} else {
-    snprintf(buf, sizeof(buf), "%d %02d-%02d-%d %d:%02d:%02d",
-             dt.dayWeek, dt.dayMonth, dt.month, dt.year, dt.hour, dt.minute, dt.second);
-    Serial.println(buf);
+// Check oscillator status
+if (!ds1302.isRunning()) {
+    // Error: DS1302 RTC oscillator stopped. Date/time cannot be trusted. 
+    // Set new date/time before reading date/time.
+    
+    // Enable oscillator
+    ds1302.clockEnable(true);
 }
 ```
 
 **Set time**
 
 ```c++
-// Set time
-rtc.setTime(12, 0, 0);
+// Write time to RTC
+ds1302.setTime(12, 0, 0);
 ```
 
 **Get time**
@@ -133,15 +110,66 @@ rtc.setTime(12, 0, 0);
 uint8_t hour;
 uint8_t minute;
 uint8_t second;
-char buf[10];
 
-// Read RTC time
-if (!rtc.getTime(&hour, &minute, &second)) {
-    Serial.println(F("Error: DS1302 read failed"));
-} else {    
-    // Print time
-    snprintf(buf, sizeof(buf), "%d:%02d:%02d", hour, minute, second);
-    Serial.println(buf);
+// Read time from RTC
+if (!ds1302.getTime(&hour, &minute, &second)) {
+    // Error: RTC read failed
+}
+```
+
+**Set date and time**
+
+```c++
+// Write RTC date/time: 13:45:09  31 December 2019  2=Tuesday
+if (!ds1302.setDateTime(13, 45, 9,  31, 12, 2019,  2) {
+    // Error: RTC write failed
+}
+```
+
+**Write date/time struct tm**
+
+```c++
+struct tm dt = {0};
+
+dt.tm_hour = 12;
+dt.tm_min = 34;
+dt.tm_sec = 56;
+dt.tm_mday = 29;
+dt.tm_mon = 1; // 0=January
+dt.tm_year = 2020-1900;
+dt.tm_wday = 6; // 0=Sunday
+
+ds1302.write(&dt);
+```
+
+**Read date/time struct tm**
+
+```c++
+struct tm dt = {0};
+
+// Read RTC date/time
+if (!ds1307.read(&dt)) {
+    // Error: RTC read failed
+}
+```
+
+**Read Unix Epoch UTC**
+
+```c++
+time_t t;
+
+// Read Unix epoch UTC from RTC
+if (!ds1307.getEpoch(&t)) {
+    // Error: RTC read failed
+}
+```
+
+**Write Unix Epoch UTC**
+
+```c++
+// Write Unix epoch UTC to RTC
+if (!ds1307.setEpoch(1599416430UL)) {
+    // Error: Set epoch failed
 }
 ```
 
@@ -149,22 +177,22 @@ if (!rtc.getTime(&hour, &minute, &second)) {
 
 ```c++
 // Write Byte to RTC RAM
-rtc.writeByteRAM(0x02, 0xA9);
+ds1302.writeByteRAM(0x02, 0xA9);
 
 // Write buffer to RTC RAM
 uint8_t buf[NUM_DS1302_RAM_REGS] = { 0x00 };
-rtc.writeBufferRAM(buf, sizeof(buf));
+ds1302.writeBufferRAM(buf, sizeof(buf));
 ```
 
 **Read from RTC RAM**
 
 ```c++
 // Read byte from RTC RAM
-uint8_t dataByte = rtc.readByteRAM(0x02);
+uint8_t dataByte = ds1302.readByteRAM(0x02);
 
 // Read buffer from RTC RAM
 uint8_t buf[NUM_DS1302_RAM_REGS];
-rtc.readBufferRAM(buf, sizeof(buf));
+ds1302.readBufferRAM(buf, sizeof(buf));
 ```
 
 **Set Trickle Charger**
@@ -173,13 +201,13 @@ Please refer to the datasheet how to configure the trickle charger.
 
 ```c++
 // Disable (default)
-rtc.writeClockRegister(DS1302_REG_TC, DS1302_TCS_DISABLE);
+ds1302.writeRegister(DS1302_REG_TC, DS1302_TCS_DISABLE);
 
 // Minimum 2 Diodes, 8kOhm
-rtc.writeClockRegister(DS1302_REG_TC, 0xAB);
+ds1302.writeRegister(DS1302_REG_TC, 0xAB);
 
 // Maximum 1 Diode, 2kOhm
-rtc.writeClockRegister(DS1302_REG_TC, 0xA5);
+ds1302.writeRegister(DS1302_REG_TC, 0xA5);
 ```
 
 **Set RTC date and time using Python**
@@ -210,61 +238,25 @@ python3 Terminal.py
 |     6      | I/O (DAT)  | 3 (DIGITAL pin) |   D2    |   5   |
 |     5      |  CE (RST)  | 4 (DIGITAL pin) |   D2    |   4   |
 
-## Benchmark results 
+## API changes v1.0.0 to v2.0.0
 
-### Arduino UNO (AVR F_CPU = 16MHz)
+The API has been changed to make RTC libraries compatible with libc `time.h`. This makes it easier
+to calculate with date/time and port the application to different platforms. See changes below:
 
-```
-DS1302 RTC benchmark
+| v1.0.0                           | v2.0.0                                                       |
+| -------------------------------- | ------------------------------------------------------------ |
+| `DS1302_DateTime`                | `struct tm`                                                  |
+|                                  | `clearOscillatorStopFlag()` merged into `clockEnable()`      |
+| `isHalted()`                     | `bool clockEnable(bool enable)`                              |
+| `halt()`                         | `void isRunning()`                                           |
+| `setDateTime()`                  | `void write(struct tm *dt)`                                  |
+| `getDateTime()`                  | `bool read(struct tm *dt)`                                   |
+| `getEpochTime()`                 | `time_t getEpoch()`                                          |
+|                                  | `void setEpoch(time_t t)`                                    |
+| `writeProtect()`                 | Removed                                                      |
+| `isProtected()`                  | Removed                                                      |
+|                                  | `void setDateTime(uint8_t hour, uint8_t min, uint8_t sec, uint8_t mday, uint8_t mon, uint16_t year, uint8_t wday)` |
 
-rtc.begin(): 160us
-rtc.writeProtect(false): 148us
-rtc.halt(false): 144us
-rtc.setDateTime(&dt): 720us
-rtc.getDateTime(&dt): 496us
-rtc.setTime(12, 0, 0): 1224us
-rtc.getTime(&hour, &minute, &second): 272us
-rtc.writeRAM(0x00, 0xFF): 144us
-rtc.writeRAM(buf, sizeof(buf): 1796us
-rtc.readRAM(0x00): 140us
-rtc.readRAM(buf, sizeof(buf)): 1812us
-```
-
-### WeMos D1 & R2 (ESP8266 F_CPU = 80MHz)
-
-```
-DS1302 RTC benchmark
-
-rtc.begin(): 180us
-rtc.writeProtect(false): 112us
-rtc.halt(false): 149us
-rtc.setDateTime(&dt): 369us
-rtc.getDateTime(&dt): 273us
-rtc.setTime(12, 0, 0): 571us
-rtc.getTime(&hour, &minute, &second): 154us
-rtc.writeRAM(0x00, 0xFF): 86us
-rtc.writeRAM(buf, sizeof(buf): 852us
-rtc.readRAM(0x00): 84us
-rtc.readRAM(buf, sizeof(buf)): 881us
-```
-
-### WeMos D1 & R2 (ESP8266 F_CPU = 160MHz)
-
-```
-DS1302 RTC benchmark
-
-rtc.begin(): 152us
-rtc.writeProtect(false): 73us
-rtc.halt(false): 108us
-rtc.setDateTime(&dt): 257us
-rtc.getDateTime(&dt): 187us
-rtc.setTime(12, 0, 0): 373us
-rtc.getTime(&hour, &minute, &second): 105us
-rtc.writeRAM(0x00, 0xFF): 62us
-rtc.writeRAM(buf, sizeof(buf): 553us
-rtc.readRAM(0x00): 62us
-rtc.readRAM(buf, sizeof(buf)): 568us
-```
 
 ## Library installation
 

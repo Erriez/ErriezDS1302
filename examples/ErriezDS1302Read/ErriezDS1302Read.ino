@@ -23,9 +23,10 @@
  */
 
 /*!
- * \brief DS1302 RTC getting started example for Arduino
+ * \brief DS1302 RTC read example for Arduino
  * \details
- *    Required library: https://github.com/Erriez/ErriezDS1302
+ *    Source:         https://github.com/Erriez/ErriezDS1302
+ *    Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
 #include <ErriezDS1302.h>
@@ -50,67 +51,43 @@
 #endif
 
 // Create DS1302 RTC object
-DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 
 void setup()
 {
-    DS1302_DateTime dt;
-
     // Initialize serial port
+    delay(500);
     Serial.begin(115200);
     while (!Serial) {
         ;
     }
-    Serial.println(F("DS1302 RTC getting started example\n"));
+    Serial.println(F("\nErriez DS1302 read example"));
 
     // Initialize RTC
-    rtc.begin();
-
-    // Set initial date and time
-    Serial.println(F("Set initial date time...\n"));
-
-    dt.second = 0;
-    dt.minute = 41;
-    dt.hour = 22;
-    dt.dayWeek = 6; // 1 = Monday
-    dt.dayMonth = 21;
-    dt.month = 4;
-    dt.year = 2018;
-    rtc.setDateTime(&dt);
-
-    // Check write protect state
-    if (rtc.isWriteProtected()) {
-        Serial.println(F("Error: DS1302 write protected"));
-        while (1) {
-            ;
-        }
+    while (!ds1302.begin()) {
+        Serial.println(F("Error: DS1302 not found"));
+        delay(3000);
     }
 
-    // Check write protect state
-    if (rtc.isHalted()) {
-        Serial.println(F("Error: DS1302 halted"));
-        while (1) {
-            ;
-        }
+    // Enable RTC clock
+    if (!ds1302.isRunning()) {
+        ds1302.clockEnable(true);
+        ds1302.setTime(12, 0, 0);
+        Serial.println(F("DS1302 clock reset"));
     }
-
-    Serial.println(F("Current date time:"));
 }
 
 void loop()
 {
-    DS1302_DateTime dt;
-    char buf[32];
+    struct tm dt;
 
-    // Get RTC date and time
-    if (!rtc.getDateTime(&dt)) {
-        Serial.println(F("Error: DS1302 read failed"));
-    } else {
-        snprintf(buf, sizeof(buf), "%d %02d-%02d-%d %d:%02d:%02d",
-                 dt.dayWeek, dt.dayMonth, dt.month, dt.year, dt.hour, dt.minute, dt.second);
-        Serial.println(buf);
-    }
+    // Read date/time from RTC
+    ds1302.read(&dt);
 
+    // Print date/time
+    Serial.println(asctime(&dt));
+
+    // Wait a second
     delay(1000);
 }

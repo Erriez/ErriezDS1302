@@ -1,36 +1,36 @@
 #######################################
-# DS1302 library for Arduino
+# Erriez DS1302 RTC library for Arduino
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-DS1302	KEYWORD1
-DS1302_DateTime	KEYWORD1
-second	KEYWORD1
-minute	KEYWORD1
-hour	KEYWORD1
-dayWeek	KEYWORD1
-dayMonth	KEYWORD1
-month	KEYWORD1
-year	KEYWORD1
+ErriezDS1302	KEYWORD1
+tm_sec	KEYWORD1
+tm_min	KEYWORD1
+tm_hour	KEYWORD1
+tm_wday	KEYWORD1
+tm_mday	KEYWORD1
+tm_mon	KEYWORD1
+tm_year	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 begin	KEYWORD2
-writeProtect	KEYWORD2
-isWriteProtected	KEYWORD2
-halt	KEYWORD2
-isHalted	KEYWORD2
-setDateTime	KEYWORD2
-getDateTime	KEYWORD2
+isRunning	KEYWORD2
+clockEnable	KEYWORD2
+getEpoch	KEYWORD2
+setEpoch	KEYWORD2
+read	KEYWORD2
+write	KEYWORD2
 setTime	KEYWORD2
 getTime	KEYWORD2
-writeClockRegister	KEYWORD2
-readClockRegister	KEYWORD2
+setDateTime	KEYWORD2
 writeByteRAM	KEYWORD2
 writeBufferRAM	KEYWORD2
+writeRegister	KEYWORD2
+readRegister	KEYWORD2
 readByteRAM	KEYWORD2
 readBufferRAM	KEYWORD2
 
@@ -38,8 +38,8 @@ readBufferRAM	KEYWORD2
 # Instances (KEYWORD2)
 #######################################
 ds1302	KEYWORD1
-rtc	KEYWORD1
 dt	KEYWORD1
+t	KEYWORD1
 
 #######################################
 # Constants (LITERAL1)

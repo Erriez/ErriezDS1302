@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
-/* DS1302 RTC example for Arduino
- *
- * Required library:
- *   https://github.com/Erriez/ErriezDS1302
+/*!
+ * \brief DS1302 ds1302 example for Arduino
+ * \details
+ *    Source:         https://github.com/Erriez/ErriezDS1302
+ *    Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
 #include <ErriezDS1302.h>
@@ -37,7 +38,7 @@
 #define DS1302_CE_PIN       4
 #elif defined(ARDUINO_ARCH_ESP8266)
 // Swap D2 and D4 pins for the ESP8266, because pin D2 is high during a
-// power-on / MCU reset / and flashing. This corrupts RTC registers.
+// power-on / MCU reset / and flashing. This corrupts ds1302 registers.
 #define DS1302_CLK_PIN      D4 // Pin is high during power-on / reset / flashing
 #define DS1302_IO_PIN       D3
 #define DS1302_CE_PIN       D2
@@ -49,77 +50,42 @@
 #error #error "May work, but not tested on this target"
 #endif
 
-// Create DS1302 RTC object
-DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+// Create DS1302 ds1302 object
+ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
-static void printDateTime();
 
 
 void setup()
 {
-    DS1302_DateTime dt;
+    struct tm dt;
 
     // Initialize serial port
+    delay(500);
     Serial.begin(115200);
     while (!Serial) {
         ;
     }
-    Serial.println(F("DS1302 RTC set date and time example\n"));
+    Serial.println(F("\nErriez DS1302 RTC trickle charger example\n"));
 
     // Initialize RTC
-    rtc.begin();
-
-    // Print current date and time
-    Serial.println(F("Current RTC date and time:"));
-    printDateTime();
-
-    // Set RTC date and time
-    dt.second = 0;
-    dt.minute = 35;
-    dt.hour = 17;
-    dt.dayWeek = 6; // 1 = Monday
-    dt.dayMonth = 21;
-    dt.month = 4;
-    dt.year = 2018;
-    rtc.setDateTime(&dt);
-
-    // Check write protect state
-    if (rtc.isWriteProtected()) {
-        Serial.println(F("Error: DS1302 write protected"));
-        while (1) {
-            ;
-        }
+    while (!ds1302.begin()) {
+        Serial.println(F("Error: DS1302 not found"));
+        delay(3000);
     }
 
-    // Check running state
-    if (rtc.isHalted()) {
-        Serial.println(F("Error: DS1302 halted"));
-        while (1) {
-            ;
-        }
-    }
+    // Read TCS register
+    Serial.print(F("TCS reg: 0x"));
+    Serial.println(ds1302.readRegister(DS1302_REG_TC), HEX);
 
-    // Print new date and time
-    Serial.println(F("New RTC date and time:"));
-    printDateTime();
+    // Write TCS register
+    // Please refer to the datasheet to set charge current
+    ds1302.writeRegister(DS1302_REG_TC, DS1302_TCS_DISABLE);
+
+    // Read TCS register
+    Serial.print(F("TCS reg: 0x"));
+    Serial.println(ds1302.readRegister(DS1302_REG_TC), HEX);
 }
 
 void loop()
 {
-
-}
-
-static void printDateTime()
-{
-    DS1302_DateTime dt;
-    char buf[32];
-
-    // Get and print RTC date and time
-    if (rtc.getDateTime(&dt)) {
-        snprintf(buf, sizeof(buf), "%d %02d-%02d-%d %d:%02d:%02d",
-                 dt.dayWeek, dt.dayMonth, dt.month, dt.year, dt.hour, dt.minute, dt.second);
-        Serial.println(buf);
-    } else {
-        Serial.println(F("Error: DS1302 read failed"));
-    }
 }

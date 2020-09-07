@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-/* DS1302 RTC benchmark for Arduino
- *
- * Required libraries:
- *   https://github.com/Erriez/ErriezDS1302
- *   https://github.com/Erriez/ErriezTimestamp
+/*!
+ * \brief DS1302 ds1302 benchmark for Arduino
+ * \details
+ *    Source:         https://github.com/Erriez/ErriezDS1302
+ *    Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
 #include <ErriezDS1302.h>
-#include <ErriezTimestamp.h>
+#include <ErriezTimestamp.h> // https://github.com/Erriez/ErriezTimestamp
 
 // Connect DS1302 data pin to Arduino DIGITAL pin
 #if defined(ARDUINO_ARCH_AVR)
@@ -39,7 +39,7 @@
 #define DS1302_CE_PIN       4
 #elif defined(ARDUINO_ARCH_ESP8266)
 // Swap D2 and D4 pins for the ESP8266, because pin D2 is high during a
-// power-on / MCU reset / and flashing. This corrupts RTC registers.
+// power-on / MCU reset / and flashing. This corrupts ds1302 registers.
 #define DS1302_CLK_PIN      D4 // Pin is high during power-on / reset / flashing
 #define DS1302_IO_PIN       D3
 #define DS1302_CE_PIN       D2
@@ -51,8 +51,8 @@
 #error #error "May work, but not tested on this target"
 #endif
 
-// Create DS1302 RTC object
-DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+// Create DS1302 object
+ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 // Create timestamp with microseconds resolution
 TimestampMicros timestamp;
@@ -60,94 +60,95 @@ TimestampMicros timestamp;
 
 void setup()
 {
-    DS1302_DateTime dt;
+    struct tm dt;
     uint8_t hour;
     uint8_t minute;
     uint8_t second;
     uint8_t buf[NUM_DS1302_RAM_REGS] = { 0xFF };
+    time_t t;
 
     // Initialize serial port
+    delay(500);
     Serial.begin(115200);
     while (!Serial) {
         ;
     }
-    Serial.println(F("DS1302 RTC benchmark\n"));
+    Serial.println(F("\nErriez DS1302 RTC benchmark\n"));
 
-    // Initialize RTC
-    Serial.print(F("rtc.begin(): "));
+    // Initialize ds1302
+    Serial.print(F("ds1302.begin(): "));
     timestamp.start();
-    rtc.begin();
-    timestamp.print();
-
-    // Make clock and RAM registers writable
-    Serial.print(F("rtc.writeProtect(false): "));
-    timestamp.start();
-    rtc.writeProtect(false);
-    timestamp.print();
-
-    // Enable RTC clock
-    Serial.print(F("rtc.halt(false): "));
-    timestamp.start();
-    rtc.halt(false);
+    ds1302.begin();
     timestamp.print();
 
     // Set date time
-    dt.hour = 12;
-    dt.minute = 0;
-    dt.second = 0;
-    dt.dayWeek = 1;
-    dt.dayMonth = 1;
-    dt.month = 1;
-    dt.year = 18;
-    Serial.print(F("rtc.setDateTime(&dt): "));
+    dt.tm_hour = 12;
+    dt.tm_min = 0;
+    dt.tm_sec = 0;
+    dt.tm_wday = 1; // 0=Sunday
+    dt.tm_mday = 1;
+    dt.tm_mon = 1;  // Month 0..11
+    dt.tm_year = 2020-1900;
+    Serial.print(F("ds1302.setDateTime(&dt): "));
     timestamp.start();
-    rtc.setDateTime(&dt);
+    ds1302.write(&dt);
     timestamp.print();
 
-    // Get date time
-    Serial.print(F("rtc.getDateTime(&dt): "));
+    // Read struct tm
+    Serial.print(F("ds1302.read(&dt): "));
     timestamp.start();
-    rtc.getDateTime(&dt);
+    ds1302.read(&dt);
+    timestamp.print();
+
+    // Read epoch
+    Serial.print(F("ds1302.getEpoch(&dt): "));
+    timestamp.start();
+    t = ds1302.getEpoch();
+    timestamp.print();
+
+    // Write epoch
+    Serial.print(F("ds1302.setEpoch(&dt): "));
+    timestamp.start();
+    ds1302.setEpoch(t);
     timestamp.print();
 
     // Set time
-    Serial.print(F("rtc.setTime(12, 0, 0): "));
+    Serial.print(F("ds1302.setTime(12, 0, 0): "));
     timestamp.start();
-    rtc.setTime(12, 0, 0);
+    ds1302.setTime(12, 0, 0);
     timestamp.print();
 
     // Get time
-    Serial.print(F("rtc.getTime(&hour, &minute, &second): "));
+    Serial.print(F("ds1302.getTime(&hour, &minute, &second): "));
     timestamp.start();
-    rtc.getTime(&hour, &minute, &second);
+    ds1302.getTime(&hour, &minute, &second);
     timestamp.print();
 
-    // Write 1 Byte to RTC RAM
-    Serial.print(F("rtc.writeRAM(0x00, 0xFF): "));
+    // Write 1 Byte to ds1302 RAM
+    Serial.print(F("ds1302.writeRAM(0x00, 0xFF): "));
     timestamp.start();
-    rtc.writeByteRAM(0x00, 0xFF);
+    ds1302.writeByteRAM(0x00, 0xFF);
     timestamp.print();
 
-    // Write 31 Bytes to RTC RAM
-    Serial.print(F("rtc.writeRAM(buf, sizeof(buf): "));
+    // Write 31 Bytes to ds1302 RAM
+    Serial.print(F("ds1302.writeRAM(buf, sizeof(buf): "));
     timestamp.start();
-    rtc.writeBufferRAM(buf, sizeof(buf));
+    ds1302.writeBufferRAM(buf, sizeof(buf));
     timestamp.print();
 
-    // Read 1 Byte from RTC RAM
-    Serial.print(F("rtc.readRAM(0x00): "));
+    // Read 1 Byte from ds1302 RAM
+    Serial.print(F("ds1302.readRAM(0x00): "));
     timestamp.start();
-    buf[0] = rtc.readByteRAM(0x00);
+    buf[0] = ds1302.readByteRAM(0x00);
     timestamp.print();
 
-    // Read 31 Bytes from RTC RAM
-    Serial.print(F("rtc.readRAM(buf, sizeof(buf)): "));
+    // Read 31 Bytes from ds1302 RAM
+    Serial.print(F("ds1302.readRAM(buf, sizeof(buf)): "));
     timestamp.start();
-    rtc.readBufferRAM(buf, sizeof(buf));
+    ds1302.readBufferRAM(buf, sizeof(buf));
     timestamp.print();
 }
 
 void loop()
 {
-
 }

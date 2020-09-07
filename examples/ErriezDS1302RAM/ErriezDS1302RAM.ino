@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
-/* DS1302 RTC RAM example for Arduino
- *
- * Required library:
- *   https://github.com/Erriez/ErriezDS1302
+/*!
+ * \brief DS1302 ds1302 RAM example for Arduino
+ * \details
+ *    Source:         https://github.com/Erriez/ErriezDS1302
+ *    Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
 #include <ErriezDS1302.h>
@@ -37,7 +38,7 @@
 #define DS1302_CE_PIN       4
 #elif defined(ARDUINO_ARCH_ESP8266)
 // Swap D2 and D4 pins for the ESP8266, because pin D2 is high during a
-// power-on / MCU reset / and flashing. This corrupts RTC registers.
+// power-on / MCU reset / and flashing. This corrupts ds1302 registers.
 #define DS1302_CLK_PIN      D4 // Pin is high during power-on / reset / flashing
 #define DS1302_IO_PIN       D3
 #define DS1302_CE_PIN       D2
@@ -49,99 +50,35 @@
 #error #error "May work, but not tested on this target"
 #endif
 
-// Create DS1302 RTC object
-DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+// Create DS1302 ds1302 object
+ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
-
-// Function prototypes
-void fillRAM();
-void printRAM();
-
-
-void setup()
-{
-    uint8_t dataByte;
-
-    // Initialize serial port
-    Serial.begin(115200);
-    while (!Serial) {
-        ;
-    }
-    Serial.println(F("DS1302 RTC RAM example\n"));
-
-    // Initialize RTC
-    rtc.begin();
-
-    // Make clock and RAM registers writable
-    rtc.writeProtect(false);
-
-    // Check RTC protect state
-    if (rtc.isWriteProtected()) {
-        Serial.println(F("Error: DS1302 not found"));
-        while (1) {
-            ;
-        }
-    }
-
-    // Print RTC RAM contents after power-on
-    printRAM();
-
-    // Fill entire RTC RAM with data
-    fillRAM();
-
-    // Verify RTC RAM data
-    checkRAM();
-
-    // Write byte to RAM
-    Serial.println(F("Write value 0xA9 to address 0x02..."));
-    rtc.writeByteRAM(0x02, 0xA9);
-
-    // Read byte from RAM
-    Serial.print(F("Read from address 0x02: "));
-    dataByte = rtc.readByteRAM(0x02);
-
-    // Verify written Byte
-    if (dataByte == 0xA9) {
-        Serial.println(F("Success"));
-    } else {
-        Serial.println(F("FAILED"));
-    }
-
-    // Print RTC RAM contents
-    printRAM();
-}
-
-void loop()
-{
-    printRAM();
-    delay(1000);
-}
 
 void fillRAM()
 {
     uint8_t buf[NUM_DS1302_RAM_REGS];
 
-    Serial.println(F("Fill RTC RAM..."));
+    Serial.println(F("Fill DS1302 RAM..."));
 
     // Fill buffer with some data
     for (uint8_t i = 0; i < sizeof(buf); i++) {
         buf[i] = 1 + i;
     }
 
-    // Write buffer to RTC RAM
-    rtc.writeBufferRAM(buf, sizeof(buf));
+    // Write buffer to ds1302 RAM
+    ds1302.writeBufferRAM(buf, sizeof(buf));
 }
 
 void checkRAM()
 {
     uint8_t buf[NUM_DS1302_RAM_REGS];
 
-    Serial.print(F("Verify RTC RAM: "));
+    Serial.print(F("Verify ds1302 RAM: "));
 
-    // Read RTC RAM
-    rtc.readBufferRAM(buf, sizeof(buf));
+    // Read ds1302 RAM
+    ds1302.readBufferRAM(buf, sizeof(buf));
 
-    // Verify contents RTC RAM
+    // Verify contents ds1302 RAM
     for (uint8_t i = 0; i < sizeof(buf); i++) {
         if (buf[i] != 1 + i) {
             // At least one Byte is not correct
@@ -158,10 +95,10 @@ void printRAM()
 {
     uint8_t buf[NUM_DS1302_RAM_REGS];
 
-    Serial.print(F("RTC RAM: "));
+    Serial.print(F("DS1302 RAM: "));
 
-    // Read RTC RAM
-    rtc.readBufferRAM(buf, sizeof(buf));
+    // Read ds1302 RAM
+    ds1302.readBufferRAM(buf, sizeof(buf));
 
     // Print RAM buffer
     for (uint8_t i = 0; i < sizeof(buf); i++) {
@@ -172,4 +109,54 @@ void printRAM()
         Serial.print(F(" "));
     }
     Serial.println();
+}
+
+void setup()
+{
+    uint8_t dataByte;
+
+    // Initialize serial port
+    delay(500);
+    Serial.begin(115200);
+    while (!Serial) {
+        ;
+    }
+    Serial.println(F("\nErriez DS1302 RTC RAM example\n"));
+
+    // Initialize RTC
+    while (!ds1302.begin()) {
+        Serial.println(F("Error: DS1302 not found"));
+        delay(3000);
+    }
+
+    // Print DS1302 RAM contents after power-on
+    printRAM();
+
+    // Fill entire DS1302 RAM with data
+    fillRAM();
+
+    // Verify DS1302 RAM data
+    checkRAM();
+
+    // Write byte to RAM
+    Serial.println(F("Write value 0xA9 to address 0x02..."));
+    ds1302.writeByteRAM(0x02, 0xA9);
+
+    // Read byte from RAM
+    Serial.print(F("Read from address 0x02: "));
+    dataByte = ds1302.readByteRAM(0x02);
+
+    // Verify written Byte
+    if (dataByte == 0xA9) {
+        Serial.println(F("Success"));
+    } else {
+        Serial.println(F("FAILED"));
+    }
+
+    // Print ds1302 RAM contents
+    printRAM();
+}
+
+void loop()
+{
 }

@@ -34,6 +34,7 @@
 #define ERRIEZ_DS1302_H_
 
 #include <Arduino.h>
+#include <time.h>
 
 //! DS1302 address/command register
 #define DS1302_ACB              0x80    //!< Address command date/time
@@ -121,46 +122,38 @@
 #define DS1302_PIN_DELAY()                                          //!< Delay between pin changes
 #endif
 
-/*!
- * \brief Date time structure
- */
-typedef struct {
-    uint8_t second;     //!< Second 0..59
-    uint8_t minute;     //!< Minute 0..59
-    uint8_t hour;       //!< Hour 0..23
-    uint8_t dayWeek;    //!< Day of the week (1 = Monday)
-    uint8_t dayMonth;   //!< Day of the month 1..31
-    uint8_t month;      //!< Month 1..12
-    uint16_t year;      //!< Year 2000..2099
-} DS1302_DateTime;
-
 
 //! DS1302 RTC class
-class DS1302
+class ErriezDS1302
 {
 public:
-    explicit DS1302(uint8_t clkPin, uint8_t ioPin, uint8_t cePin);
-    virtual bool begin();
+    ErriezDS1302(uint8_t clkPin, uint8_t ioPin, uint8_t cePin);
+    bool begin();
 
-    virtual void writeProtect(bool enable);
-    virtual bool isWriteProtected();
-    virtual void halt(bool halt);
-    virtual bool isHalted();
-    virtual void setDateTime(DS1302_DateTime *dateTime);
-    virtual bool getDateTime(DS1302_DateTime *dateTime);
-    virtual void setTime(uint8_t hour, uint8_t minute, uint8_t second);
-    virtual bool getTime(uint8_t *hour, uint8_t *minute, uint8_t *second);
+    bool isRunning();
+    void clockEnable(bool enable=true);
 
-    virtual void writeClockRegister(uint8_t reg, uint8_t value);
-    virtual uint8_t readClockRegister(uint8_t reg);
+    // Set/get date/time
+    time_t getEpoch();
+    void setEpoch(time_t t);
+    bool read(struct tm *dt);
+    void write(const struct tm *dt);
+    void setTime(uint8_t hour, uint8_t min, uint8_t sec);
+    bool getTime(uint8_t *hour, uint8_t *min, uint8_t *sec);
+    void setDateTime(uint8_t hour, uint8_t min, uint8_t sec,
+                     uint8_t mday, uint8_t mon, uint16_t year,
+                     uint8_t wday);
 
-    virtual void writeByteRAM(uint8_t addr, uint8_t value);
-    virtual void writeBufferRAM(uint8_t *buf, uint8_t len);
+    void writeRegister(uint8_t reg, uint8_t value);
+    uint8_t readRegister(uint8_t reg);
 
-    virtual uint8_t readByteRAM(uint8_t addr);
-    virtual void readBufferRAM(uint8_t *buf, uint8_t len);
+    void writeByteRAM(uint8_t addr, uint8_t value);
+    void writeBufferRAM(uint8_t *buf, uint8_t len);
 
-protected:
+    uint8_t readByteRAM(uint8_t addr);
+    void readBufferRAM(uint8_t *buf, uint8_t len);
+
+private:
 #ifdef __AVR
     uint8_t _clkPort;   //!< Clock port in IO pin register
     uint8_t _ioPort;    //!< Data port in IO pin register
@@ -175,17 +168,17 @@ protected:
     uint8_t _cePin;     //!< Chip enable pin
 #endif
 
-    // RTC interface functions
-    virtual void transferBegin();
-    virtual void transferEnd();
-    virtual void writeAddrCmd(uint8_t value);
-    virtual void writeByte(uint8_t value);
-    virtual uint8_t readByte();
-    virtual void readBuffer(void *buf, uint8_t len);
-
     // BCD conversions
-    virtual uint8_t bcdToDec(uint8_t bcd);
-    virtual uint8_t decToBcd(uint8_t dec);
+    uint8_t bcdToDec(uint8_t bcd);
+    uint8_t decToBcd(uint8_t dec);
+
+    // RTC interface functions
+    void transferBegin();
+    void transferEnd();
+    void writeAddrCmd(uint8_t value);
+    void writeByte(uint8_t value);
+    uint8_t readByte();
+    void readBuffer(void *buf, uint8_t len);
 };
 
 #endif // ERRIEZ_DS1302_H_

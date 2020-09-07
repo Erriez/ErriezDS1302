@@ -22,84 +22,117 @@
  * SOFTWARE.
  */
 
-/* DS1302 RTC 1Hz square wave example for Arduino
- *
- * Required library:
- *   https://github.com/Erriez/ErriezDS1302
+/*!
+ * \brief DS1302 RTC alarm example for Arduino
+ * \details
+ *    Source:         https://github.com/Erriez/ErriezDS1302
+ *    Documentation:  https://erriez.github.io/ErriezDS1302
  */
 
 #include <ErriezDS1302.h>
+#include "ErriezDS1302_Alarm.h"
+
 
 // Connect DS1302 data pin to Arduino DIGITAL pin
 #if defined(ARDUINO_ARCH_AVR)
 #define DS1302_CLK_PIN      2
 #define DS1302_IO_PIN       3
 #define DS1302_CE_PIN       4
-#define SQUARE_PIN          5
 #elif defined(ARDUINO_ARCH_ESP8266)
 // Swap D2 and D4 pins for the ESP8266, because pin D2 is high during a
 // power-on / MCU reset / and flashing. This corrupts RTC registers.
 #define DS1302_CLK_PIN      D4 // Pin is high during power-on / reset / flashing
 #define DS1302_IO_PIN       D3
 #define DS1302_CE_PIN       D2
-#define SQUARE_PIN          D5
 #elif defined(ARDUINO_ARCH_ESP32)
 #define DS1302_CLK_PIN      0
 #define DS1302_IO_PIN       4
 #define DS1302_CE_PIN       5
-#define SQUARE_PIN          16
 #else
 #error #error "May work, but not tested on this target"
 #endif
 
 // Create DS1302 RTC object
-DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
+
+// Alarm on handler
+void alarmOn()
+{
+    Serial.println("Alarm ON");
+}
+
+// Alarm off handler
+void alarmOff()
+{
+    Serial.println("Alarm OFF");
+}
+
+// Define at least one alarm (hour, minute, second, handler)
+Alarm alarms[] = {
+    Alarm(12, 0, 5, &alarmOn),
+    Alarm(12, 0, 15, &alarmOff),
+    Alarm(12, 0, 30, &alarmOn),
+    Alarm(12, 1, 0, &alarmOff)
+};
+
+void printTime(uint8_t hour, uint8_t minute, uint8_t second)
+{
+    char buf[10];
+
+    // Print time
+    snprintf(buf, sizeof(buf), "%d:%02d:%02d", hour, minute, second);
+    Serial.println(buf);
+}
 
 void setup()
 {
-    DS1302_DateTime dt;
-
     // Initialize serial port
+    delay(500);
     Serial.begin(115200);
     while (!Serial) {
         ;
     }
-    Serial.println(F("DS1302 RTC 1Hz square wave example\n"));
+    Serial.println(F("DS1302 RTC alarm example\n"));
 
     // Initialize RTC
-    rtc.begin();
-
-    // Make clock and RAM registers writable
-    rtc.writeProtect(false);
-
-    // Enable RTC clock
-    rtc.halt(false);
-
-    // Check RTC running and write protect states
-    if (rtc.isWriteProtected() || rtc.isHalted()) {
+    while (!ds1302.begin()) {
         Serial.println(F("Error: DS1302 not found"));
-        while (1) {
-            ;
-        }
+        delay(3000);
     }
 
-    // Set square wave pin to output
-    pinMode(SQUARE_PIN, OUTPUT);
+    // Enable RTC clock
+    ds1302.clockEnable(true);
+
+    // Set initial time
+    ds1302.setTime(12, 0, 0);
 }
 
 void loop()
 {
-    uint8_t secondLast;
+    static uint8_t secondLast = 0xff;
+    uint8_t hour;
+    uint8_t minute;
     uint8_t second;
 
-    secondLast = rtc.readClockRegister(0x00);
+    // Read RTC time
+    if (!ds1302.getTime(&hour, &minute, &second)) {
+        Serial.println(F("Error: DS1302 read failed"));
+    } else {
+        // Print RTC time every second
+        if (second != secondLast) {
+            secondLast = second;
 
-    do {
-        second = rtc.readClockRegister(0x00);
-    } while (secondLast == second);
+            // Print RTC time
+            printTime(hour, minute, second);
 
-    digitalWrite(SQUARE_PIN, HIGH);
-    delay(500);
-    digitalWrite(SQUARE_PIN, LOW);
+            // Handle alarms
+            for (uint8_t i = 0; i < sizeof(alarms) / sizeof(Alarm); i++) {
+                alarms[i].tick(hour, minute, second);
+            }
+        }
+    }
+
+    // Wait 100ms
+    delay(100);
 }
