@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Erriez DHT22 library for Arduino: DS1302 RTC (Real Time Clock) library for Arduino</title>
+<title>Erriez DS1302 RTC library for Arduino: DS1302 RTC (Real Time Clock) library for Arduino</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,12 +20,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="DHT22_Arduino_UNO.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="DS1302.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Erriez DHT22 library for Arduino
-   &#160;<span id="projectnumber">1.2.0</span>
+   <div id="projectname">Erriez DS1302 RTC library for Arduino
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
-   <div id="projectbrief">AM2302/AM2303 DHT22 temperature and humidity sensor library for Arduino</div>
+   <div id="projectbrief">DS1302 RTC library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -62,71 +62,66 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> RTC (Real Time Clock) library for Arduino </div>  </div>
+<div class="title">DS1302 RTC (Real Time Clock) library for Arduino </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a href="https://travis-ci.org/Erriez/ErriezDS1302"></a></p>
-<p>This is an optimized 3-wire <a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> RTC (Real Time Clock) library for Arduino.</p>
+<p>This is a 3-wire DS1302 RTC (Real Time Clock) library for Arduino.</p>
 <div class="image">
 <img src="https://raw.githubusercontent.com/Erriez/DS1302/master/extras/DS1302.png" alt="DS1302 RTC"/>
 </div>
 <h2>Library features</h2>
 <ul>
-<li>Read / write RTC date and time.</li>
+<li>libc <code>&lt;time.h&gt;</code> compatible</li>
+<li>Read/write date/time <code>struct tm</code></li>
+<li>Set/get Unix epoch UTC <code>time_t</code></li>
+<li>Set/get time (hours, minutes, seconds)</li>
+<li>Set date and time</li>
 <li>Read / write 31 Bytes battery backupped RTC RAM.</li>
 <li>Programmable trickle charge to charge super-caps / lithium batteries.</li>
 <li>Optimized IO interface for Atmel AVR platform.</li>
-<li>Tested on platforms:<ul>
-<li>8-bit Atmel AVR (<a href="https://store.arduino.cc/arduino-uno-rev3">Arduino UNO</a> / <a href="https://store.arduino.cc/arduino-nano">Nano</a> / <a href="https://store.arduino.cc/arduino-mini-05">Mini</a> / <a href="https://store.arduino.cc/arduino-micro">Micro</a> / <a href="https://store.arduino.cc/arduino-leonardo-with-headers">Leonardo</a> / <a href="https://store.arduino.cc/arduino-mega-2560-rev3">Mega2560</a>)</li>
-<li>32-bit ESP8266 (<a href="https://www.google.com/search?q=wemos+d1+r2&amp;tbm=isch">WeMos D1 &amp; R2</a> / <a href="https://www.google.com/search?q=geekcreit+esp12e+devkit+v2&amp;tbm=isch">Node MCU ESP12E</a>)</li>
-<li>32-bit ESP32 (<a href="https://www.google.com/search?q=wemos+lolin32+oled&amp;tbm=isch">WeMos LOLIN32 + OLED</a>)</li>
 </ul>
-</li>
-<li>Supported IDE's:<ul>
-<li><a href="https://www.arduino.cc/en/Main/Software">Arduino IDE</a> (v1.8.5)</li>
-<li><a href="https://www.jetbrains.com/clion/download">CLion</a> (2018.1)</li>
-<li><a href="https://atom.io/">Atom</a> / <a href="https://platformio.org/">PlatformIO</a> with CI (Continuous Integration)</li>
-<li><a href="https://www.microchip.com/mplab/avr-support/atmel-studio-7">Atmel Studio</a> (7.0)</li>
-</ul>
-</li>
-</ul>
-<h2><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> specifications</h2>
+<h2>DS1302 specifications</h2>
 <p><b>IMPORTANT NOTES:</b></p>
 <ul>
-<li>The <a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> RTC time may deviate &gt;1 minute each day, so this device is not recommended for designs with high precision requirements.</li>
+<li>The DS1302 RTC time may deviate &gt;1 minute each day, so this device is not recommended for designs with high precision requirements.</li>
 <li>The <a href="https://github.com/Erriez/ErriezDS3231">high precision DS3231 I2C RTC</a> is recommended for new designs.</li>
 <li>The 3-wire interface is <b>NOT</b> compatible with SPI.</li>
 </ul>
 <h2>Examples</h2>
-<p>Arduino IDE | File | Examples | Erriez <a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> RTC:</p>
+<p>Arduino IDE | File | Examples | Erriez DS1302 RTC:</p>
 <ul>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/Alarm/Alarm.ino">Alarm</a>: Program one or more alarms.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/Benchmark/Benchmark.ino">Benchmark</a>: Benchmark library.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/GettingStarted/GettingStarted.ino">GettingStarted</a>: Getting started example.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/PrintDateTime/PrintDateTime.ino">PrintDateTime</a>: Print date and time with PROGMEM strings.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/RAM/RAM.ino">RAM</a>: Read/write RTC RAM.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/SetDateTime/SetDateTime.ino">SetDateTime</a>: Set date time.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/SetTrickleCharger/SetTrickleCharger.ino">SetTrickleCharger</a>: Program trickle battery/capacitor charger.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/SquareWave1Hz/SquareWave1Hz.ino">SquareWave1Hz</a>: 1Hz square wave output on DIGITAL pin.</li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.ino">Terminal</a> and <a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.py">Python script</a> to set date time.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Alarm/ErriezDS1302Alarm.ino">Alarm</a>: Program one or more software alarms.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Benchmark/ErriezDS1302Benchmark.ino">Benchmark</a>: Benchmark library.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302DateStrings/ErriezDS1302DateStrings.ino">GettingStarted</a>: Date strings in flash example.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302RAM/ErriezDS1302RAM.ino">RAM</a>: Read/write RTC RAM.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Read/ErriezDS1302Read.ino">Read</a> Read example.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetDateTime/ErriezDS1302SetDateTime.ino">SetDateTime</a>: Set date time.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetTrickleCharger/ErriezDS1302SetTrickleCharger.ino">SetTrickleCharger</a>: Program trickle battery/capacitor charger.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.ino">Terminal</a> and <a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.py">Python script</a> to set date time.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Test/ErriezDS1302Test.ino">Test</a>: Regression test.</li>
 </ul>
 <h2>Documentation</h2>
 <ul>
 <li><a href="https://erriez.github.io/ErriezDS1302">Online HTML</a></li>
-<li><a href="https://github.com/Erriez/ErriezDS1302/raw/master/ErriezDS1302.pdf">Download PDF</a>.</li>
-<li><a href="https://www.google.com/search?q=DS1302+datasheet">DS1302 datasheet</a>.</li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/ErriezDS1302.pdf">Doxygen PDF</a></li>
+<li><a href="https://github.com/Erriez/ErriezDS1302/blob/master/extras/DS1302.pdf">DS1307 datasheet</a></li>
 </ul>
 <h2>Usage</h2>
 <p><b>Initialization</b></p>
-<div class="fragment"><div class="line">{c++}</div><div class="line">#include &lt;ErriezDS1302.h&gt;</div><div class="line"></div><div class="line">// Connect DS1302 data pin to Arduino DIGITAL pin</div><div class="line">#if defined(ARDUINO_ARCH_AVR)</div><div class="line">#define DS1302_CLK_PIN      2</div><div class="line">#define DS1302_IO_PIN       3</div><div class="line">#define DS1302_CE_PIN       4</div><div class="line">#elif defined(ARDUINO_ARCH_ESP8266)</div><div class="line">#define DS1302_CLK_PIN      D4</div><div class="line">#define DS1302_IO_PIN       D3</div><div class="line">#define DS1302_CE_PIN       D2</div><div class="line">#elif defined(ARDUINO_ARCH_ESP32)</div><div class="line">#define DS1302_CLK_PIN      0</div><div class="line">#define DS1302_IO_PIN       4</div><div class="line">#define DS1302_CE_PIN       5</div><div class="line">#else</div><div class="line">#error #error &quot;May work, but not tested on this target&quot;</div><div class="line">#endif</div><div class="line"></div><div class="line">// Create DS1302 RTC object</div><div class="line">DS1302 rtc = DS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);</div><div class="line"></div><div class="line">void setup()</div><div class="line">{</div><div class="line">    bool running;</div><div class="line"></div><div class="line">    // Initialize RTC</div><div class="line">    running = rtc.begin();</div><div class="line">}</div></div><!-- fragment --><p><b>Set date and time</b></p>
-<div class="fragment"><div class="line">{C++}</div><div class="line">DS1302_DateTime dt;</div><div class="line"></div><div class="line">// Set initial date and time</div><div class="line">dt.second = 0;</div><div class="line">dt.minute = 41;</div><div class="line">dt.hour = 22;</div><div class="line">dt.dayWeek = 6; // 1 = Monday</div><div class="line">dt.dayMonth = 21;</div><div class="line">dt.month = 4;</div><div class="line">dt.year = 2018;</div><div class="line">rtc.setDateTime(&amp;dt);</div></div><!-- fragment --><p><b>Get date and time</b></p>
-<div class="fragment"><div class="line">{c++}</div><div class="line">DS1302_DateTime dt;</div><div class="line">char buf[32];</div><div class="line"></div><div class="line">// Get RTC date and time</div><div class="line">if (!rtc.getDateTime(&amp;dt)) {</div><div class="line">    Serial.println(F(&quot;Error: DS1302 read failed&quot;));</div><div class="line">} else {</div><div class="line">    snprintf(buf, sizeof(buf), &quot;%d %02d-%02d-%d %d:%02d:%02d&quot;,</div><div class="line">             dt.dayWeek, dt.dayMonth, dt.month, dt.year, dt.hour, dt.minute, dt.second);</div><div class="line">    Serial.println(buf);</div><div class="line">}</div></div><!-- fragment --><p><b>Set time</b></p>
-<div class="fragment"><div class="line">{c++}</div><div class="line">// Set time</div><div class="line">rtc.setTime(12, 0, 0);</div></div><!-- fragment --><p><b>Get time</b></p>
-<div class="fragment"><div class="line">{c++}</div><div class="line">uint8_t hour;</div><div class="line">uint8_t minute;</div><div class="line">uint8_t second;</div><div class="line">char buf[10];</div><div class="line"></div><div class="line">// Read RTC time</div><div class="line">if (!rtc.getTime(&amp;hour, &amp;minute, &amp;second)) {</div><div class="line">    Serial.println(F(&quot;Error: DS1302 read failed&quot;));</div><div class="line">} else {    </div><div class="line">    // Print time</div><div class="line">    snprintf(buf, sizeof(buf), &quot;%d:%02d:%02d&quot;, hour, minute, second);</div><div class="line">    Serial.println(buf);</div><div class="line">}</div></div><!-- fragment --><p><b>Write to RTC RAM</b></p>
-<div class="fragment"><div class="line">{c++}</div><div class="line">// Write Byte to RTC RAM</div><div class="line">rtc.writeByteRAM(0x02, 0xA9);</div><div class="line"></div><div class="line">// Write buffer to RTC RAM</div><div class="line">uint8_t buf[NUM_DS1302_RAM_REGS] = { 0x00 };</div><div class="line">rtc.writeBufferRAM(buf, sizeof(buf));</div></div><!-- fragment --><p><b>Read from RTC RAM</b></p>
-<div class="fragment"><div class="line">{c++}</div><div class="line">// Read byte from RTC RAM</div><div class="line">uint8_t dataByte = rtc.readByteRAM(0x02);</div><div class="line"></div><div class="line">// Read buffer from RTC RAM</div><div class="line">uint8_t buf[NUM_DS1302_RAM_REGS];</div><div class="line">rtc.readBufferRAM(buf, sizeof(buf));</div></div><!-- fragment --><p><b>Set Trickle Charger</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">#include &lt;ErriezDS1302.h&gt;</div><div class="line"></div><div class="line">// Connect DS1302 data pin to Arduino DIGITAL pin</div><div class="line">#if defined(ARDUINO_ARCH_AVR)</div><div class="line">#define DS1302_CLK_PIN      2</div><div class="line">#define DS1302_IO_PIN       3</div><div class="line">#define DS1302_CE_PIN       4</div><div class="line">#elif defined(ARDUINO_ARCH_ESP8266)</div><div class="line">#define DS1302_CLK_PIN      D4</div><div class="line">#define DS1302_IO_PIN       D3</div><div class="line">#define DS1302_CE_PIN       D2</div><div class="line">#elif defined(ARDUINO_ARCH_ESP32)</div><div class="line">#define DS1302_CLK_PIN      0</div><div class="line">#define DS1302_IO_PIN       4</div><div class="line">#define DS1302_CE_PIN       5</div><div class="line">#else</div><div class="line">#error #error &quot;May work, but not tested on this target&quot;</div><div class="line">#endif</div><div class="line"></div><div class="line">// Create DS1302 RTC object</div><div class="line">ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);</div><div class="line"></div><div class="line">void setup()</div><div class="line">{</div><div class="line">    // Initialize RTC</div><div class="line">    while (!ds1302.begin()) {</div><div class="line">        Serial.println(F(&quot;Error: DS1302 not found&quot;));</div><div class="line">        delay(3000);</div><div class="line">    }</div><div class="line">}</div></div><!-- fragment --><p><b>Check oscillator status at startup</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">// Check oscillator status</div><div class="line">if (!ds1302.isRunning()) {</div><div class="line">    // Error: DS1302 RTC oscillator stopped. Date/time cannot be trusted. </div><div class="line">    // Set new date/time before reading date/time.</div><div class="line"></div><div class="line">    // Enable oscillator</div><div class="line">    ds1302.clockEnable(true);</div><div class="line">}</div></div><!-- fragment --><p><b>Set time</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">// Write time to RTC</div><div class="line">ds1302.setTime(12, 0, 0);</div></div><!-- fragment --><p><b>Get time</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">uint8_t hour;</div><div class="line">uint8_t minute;</div><div class="line">uint8_t second;</div><div class="line"></div><div class="line">// Read time from RTC</div><div class="line">if (!ds1302.getTime(&amp;hour, &amp;minute, &amp;second)) {</div><div class="line">    // Error: RTC read failed</div><div class="line">}</div></div><!-- fragment --><p><b>Set date and time</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">// Write RTC date/time: 13:45:09  31 December 2019  2=Tuesday</div><div class="line">if (!ds1302.setDateTime(13, 45, 9,  31, 12, 2019,  2) {</div><div class="line">    // Error: RTC write failed</div><div class="line">}</div></div><!-- fragment --><p><b>Write date/time struct tm</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">struct tm dt = {0};</div><div class="line"></div><div class="line">dt.tm_hour = 12;</div><div class="line">dt.tm_min = 34;</div><div class="line">dt.tm_sec = 56;</div><div class="line">dt.tm_mday = 29;</div><div class="line">dt.tm_mon = 1; // 0=January</div><div class="line">dt.tm_year = 2020-1900;</div><div class="line">dt.tm_wday = 6; // 0=Sunday</div><div class="line"></div><div class="line">ds1302.write(&amp;dt);</div></div><!-- fragment --><p><b>Read date/time struct tm</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">struct tm dt = {0};</div><div class="line"></div><div class="line">// Read RTC date/time</div><div class="line">if (!ds1307.read(&amp;dt)) {</div><div class="line">    // Error: RTC read failed</div><div class="line">}</div></div><!-- fragment --><p><b>Read Unix Epoch UTC</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">time_t t;</div><div class="line"></div><div class="line">// Read Unix epoch UTC from RTC</div><div class="line">if (!ds1307.getEpoch(&amp;t)) {</div><div class="line">    // Error: RTC read failed</div><div class="line">}</div></div><!-- fragment --><p><b>Write Unix Epoch UTC</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">// Write Unix epoch UTC to RTC</div><div class="line">if (!ds1307.setEpoch(1599416430UL)) {</div><div class="line">    // Error: Set epoch failed</div><div class="line">}</div></div><!-- fragment --><p><b>Write to RTC RAM</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">// Write Byte to RTC RAM</div><div class="line">ds1302.writeByteRAM(0x02, 0xA9);</div><div class="line"></div><div class="line">// Write buffer to RTC RAM</div><div class="line">uint8_t buf[NUM_DS1302_RAM_REGS] = { 0x00 };</div><div class="line">ds1302.writeBufferRAM(buf, sizeof(buf));</div></div><!-- fragment --><p><b>Read from RTC RAM</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">// Read byte from RTC RAM</div><div class="line">uint8_t dataByte = ds1302.readByteRAM(0x02);</div><div class="line"></div><div class="line">// Read buffer from RTC RAM</div><div class="line">uint8_t buf[NUM_DS1302_RAM_REGS];</div><div class="line">ds1302.readBufferRAM(buf, sizeof(buf));</div></div><!-- fragment --><p><b>Set Trickle Charger</b></p>
 <p>Please refer to the datasheet how to configure the trickle charger.</p>
-<div class="fragment"><div class="line">{c++}</div><div class="line">// Disable (default)</div><div class="line">rtc.writeClockRegister(DS1302_REG_TC, DS1302_TCS_DISABLE);</div><div class="line"></div><div class="line">// Minimum 2 Diodes, 8kOhm</div><div class="line">rtc.writeClockRegister(DS1302_REG_TC, 0xAB);</div><div class="line"></div><div class="line">// Maximum 1 Diode, 2kOhm</div><div class="line">rtc.writeClockRegister(DS1302_REG_TC, 0xA5);</div></div><!-- fragment --><p><b>Set RTC date and time using Python</b></p>
+<div class="fragment"><div class="line">{c++}</div><div class="line">// Disable (default)</div><div class="line">ds1302.writeRegister(DS1302_REG_TC, DS1302_TCS_DISABLE);</div><div class="line"></div><div class="line">// Minimum 2 Diodes, 8kOhm</div><div class="line">ds1302.writeRegister(DS1302_REG_TC, 0xAB);</div><div class="line"></div><div class="line">// Maximum 1 Diode, 2kOhm</div><div class="line">ds1302.writeRegister(DS1302_REG_TC, 0xA5);</div></div><!-- fragment --><p><b>Set RTC date and time using Python</b></p>
 <p>Flash <a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.ino">Terminal</a> example.</p>
 <p>Set COM port in <a href="https://github.com/Erriez/ErriezDS1302/blob/master/examples/Terminal/Terminal.py">examples/Terminal/Terminal.py</a> Python script.</p>
 <p>Run Python script:</p>
@@ -134,7 +129,7 @@ $(function() {
 <p><b>Note:</b> ESP8266 pin D4 is high during a power cycle / reset / flashing which may corrupt RTC registers. For this reason, pins D2 and D4 are swapped.</p>
 <table class="doxtable">
 <tr>
-<th align="center"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> Pin </th><th align="center"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> IC </th><th align="center">Atmel AVR </th><th align="center">ESP8266 </th><th align="center">ESP32  </th></tr>
+<th align="center">DS1302 Pin </th><th align="center">DS1302 IC </th><th align="center">Atmel AVR </th><th align="center">ESP8266 </th><th align="center">ESP32  </th></tr>
 <tr>
 <td align="center">4 </td><td align="center">GND </td><td align="center">GND </td><td align="center">GND </td><td align="center">GND </td></tr>
 <tr>
@@ -146,11 +141,35 @@ $(function() {
 <tr>
 <td align="center">5 </td><td align="center">CE (RST) </td><td align="center">4 (DIGITAL pin) </td><td align="center">D2 </td><td align="center">4 </td></tr>
 </table>
-<h2>Benchmark results</h2>
-<h3>Arduino UNO (AVR F_CPU = 16MHz)</h3>
-<div class="fragment"><div class="line">DS1302 RTC benchmark</div><div class="line"></div><div class="line">rtc.begin(): 160us</div><div class="line">rtc.writeProtect(false): 148us</div><div class="line">rtc.halt(false): 144us</div><div class="line">rtc.setDateTime(&amp;dt): 720us</div><div class="line">rtc.getDateTime(&amp;dt): 496us</div><div class="line">rtc.setTime(12, 0, 0): 1224us</div><div class="line">rtc.getTime(&amp;hour, &amp;minute, &amp;second): 272us</div><div class="line">rtc.writeRAM(0x00, 0xFF): 144us</div><div class="line">rtc.writeRAM(buf, sizeof(buf): 1796us</div><div class="line">rtc.readRAM(0x00): 140us</div><div class="line">rtc.readRAM(buf, sizeof(buf)): 1812us</div></div><!-- fragment --><h3>WeMos D1 &amp; R2 (ESP8266 F_CPU = 80MHz)</h3>
-<div class="fragment"><div class="line">DS1302 RTC benchmark</div><div class="line"></div><div class="line">rtc.begin(): 180us</div><div class="line">rtc.writeProtect(false): 112us</div><div class="line">rtc.halt(false): 149us</div><div class="line">rtc.setDateTime(&amp;dt): 369us</div><div class="line">rtc.getDateTime(&amp;dt): 273us</div><div class="line">rtc.setTime(12, 0, 0): 571us</div><div class="line">rtc.getTime(&amp;hour, &amp;minute, &amp;second): 154us</div><div class="line">rtc.writeRAM(0x00, 0xFF): 86us</div><div class="line">rtc.writeRAM(buf, sizeof(buf): 852us</div><div class="line">rtc.readRAM(0x00): 84us</div><div class="line">rtc.readRAM(buf, sizeof(buf)): 881us</div></div><!-- fragment --><h3>WeMos D1 &amp; R2 (ESP8266 F_CPU = 160MHz)</h3>
-<div class="fragment"><div class="line">DS1302 RTC benchmark</div><div class="line"></div><div class="line">rtc.begin(): 152us</div><div class="line">rtc.writeProtect(false): 73us</div><div class="line">rtc.halt(false): 108us</div><div class="line">rtc.setDateTime(&amp;dt): 257us</div><div class="line">rtc.getDateTime(&amp;dt): 187us</div><div class="line">rtc.setTime(12, 0, 0): 373us</div><div class="line">rtc.getTime(&amp;hour, &amp;minute, &amp;second): 105us</div><div class="line">rtc.writeRAM(0x00, 0xFF): 62us</div><div class="line">rtc.writeRAM(buf, sizeof(buf): 553us</div><div class="line">rtc.readRAM(0x00): 62us</div><div class="line">rtc.readRAM(buf, sizeof(buf)): 568us</div></div><!-- fragment --><h2>Library installation</h2>
+<h2>API changes v1.0.0 to v2.0.0</h2>
+<p>The API has been changed to make RTC libraries compatible with libc <code>time.h</code>. This makes it easier to calculate with date/time and port the application to different platforms. See changes below:</p>
+<table class="doxtable">
+<tr>
+<th>v1.0.0 </th><th>v2.0.0  </th></tr>
+<tr>
+<td><code>DS1302_DateTime</code> </td><td><code>struct tm</code> </td></tr>
+<tr>
+<td></td><td><code>clearOscillatorStopFlag()</code> merged into <code>clockEnable()</code> </td></tr>
+<tr>
+<td><code>isHalted()</code> </td><td><code>bool clockEnable(bool enable)</code> </td></tr>
+<tr>
+<td><code>halt()</code> </td><td><code>void isRunning()</code> </td></tr>
+<tr>
+<td><code>setDateTime()</code> </td><td><code>void write(struct tm *dt)</code> </td></tr>
+<tr>
+<td><code>getDateTime()</code> </td><td><code>bool read(struct tm *dt)</code> </td></tr>
+<tr>
+<td><code>getEpochTime()</code> </td><td><code>time_t getEpoch()</code> </td></tr>
+<tr>
+<td></td><td><code>void setEpoch(time_t t)</code> </td></tr>
+<tr>
+<td><code>writeProtect()</code> </td><td>Removed </td></tr>
+<tr>
+<td><code>isProtected()</code> </td><td>Removed </td></tr>
+<tr>
+<td></td><td><code>void setDateTime(uint8_t hour, uint8_t min, uint8_t sec, uint8_t mday, uint8_t mon, uint16_t year, uint8_t wday)</code> </td></tr>
+</table>
+<h2>Library installation</h2>
 <p>Please refer to the <a href="https://github.com/Erriez/ErriezArduinoLibrariesAndSketches/wiki">Wiki</a> page.</p>
 <h2>Other Arduino Libraries and Sketches from Erriez</h2>
 <ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Erriez DHT22 library for Arduino: src/ErriezDS1302.h File Reference</title>
+<title>Erriez DS1302 RTC library for Arduino: src/ErriezDS1302.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,12 +20,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="DHT22_Arduino_UNO.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="DS1302.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Erriez DHT22 library for Arduino
-   &#160;<span id="projectnumber">1.2.0</span>
+   <div id="projectname">Erriez DS1302 RTC library for Arduino
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
-   <div id="projectbrief">AM2302/AM2303 DHT22 temperature and humidity sensor library for Arduino</div>
+   <div id="projectbrief">DS1302 RTC library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -73,9 +73,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> RTC library for Arduino.  
+<p>DS1302 RTC library for Arduino.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ErriezDS1302.h:</div>
 <div class="dyncontent">
@@ -96,17 +97,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_d_s1302___date_time.html">DS1302_DateTime</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Date time structure.  <a href="struct_d_s1302___date_time.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s1302.html">DS1302</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> RTC class.  <a href="class_d_s1302.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_erriez_d_s1302.html">ErriezDS1302</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 RTC class.  <a href="class_erriez_d_s1302.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a13c23218f58fa87717c3b0f23cbdefe7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a>&#160;&#160;&#160;0x80</td></tr>
-<tr class="memdesc:a13c23218f58fa87717c3b0f23cbdefe7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> address/command register.  <a href="#a13c23218f58fa87717c3b0f23cbdefe7">More...</a><br /></td></tr>
+<tr class="memdesc:a13c23218f58fa87717c3b0f23cbdefe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 address/command register.  <a href="#a13c23218f58fa87717c3b0f23cbdefe7">More...</a><br /></td></tr>
 <tr class="separator:a13c23218f58fa87717c3b0f23cbdefe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af485f398951fbc59758449c781f68f62"><td class="memItemLeft" align="right" valign="top"><a id="af485f398951fbc59758449c781f68f62"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#af485f398951fbc59758449c781f68f62">DS1302_ACB_RAM</a>&#160;&#160;&#160;0x40</td></tr>
@@ -126,38 +124,38 @@ Macros</h2></td></tr>
 <tr class="separator:a3a87988056dd4beb41658660714ad7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0065e37bae556b09cf34aac22358661e"><td class="memItemLeft" align="right" valign="top"><a id="a0065e37bae556b09cf34aac22358661e"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a0065e37bae556b09cf34aac22358661e">DS1302_CMD_READ_CLOCK_REG</a>(reg)&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#a1ccf2d2fc9a60901722c032c4596fed2">DS1302_ACB_CLOCK</a> | (((reg) &amp; 0x1F) &lt;&lt; 1) | DS1302_ACB_READ)</td></tr>
-<tr class="memdesc:a0065e37bae556b09cf34aac22358661e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> read clock register. <br /></td></tr>
+<tr class="memdesc:a0065e37bae556b09cf34aac22358661e"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 read clock register. <br /></td></tr>
 <tr class="separator:a0065e37bae556b09cf34aac22358661e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab69db7c5560712cf52a8c3117adb23b4"><td class="memItemLeft" align="right" valign="top"><a id="ab69db7c5560712cf52a8c3117adb23b4"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#ab69db7c5560712cf52a8c3117adb23b4">DS1302_CMD_WRITE_CLOCK_REG</a>(reg)&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#a1ccf2d2fc9a60901722c032c4596fed2">DS1302_ACB_CLOCK</a> | (((reg) &amp; 0x1F) &lt;&lt; 1) | DS1302_ACB_WRITE)</td></tr>
-<tr class="memdesc:ab69db7c5560712cf52a8c3117adb23b4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> write clock register. <br /></td></tr>
+<tr class="memdesc:ab69db7c5560712cf52a8c3117adb23b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 write clock register. <br /></td></tr>
 <tr class="separator:ab69db7c5560712cf52a8c3117adb23b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae50789535612abc96d3b9a67bf6ec960"><td class="memItemLeft" align="right" valign="top"><a id="ae50789535612abc96d3b9a67bf6ec960"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#ae50789535612abc96d3b9a67bf6ec960">DS1302_CMD_READ_CLOCK_BURST</a>&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#a1ccf2d2fc9a60901722c032c4596fed2">DS1302_ACB_CLOCK</a> | 0x3E | DS1302_ACB_READ)</td></tr>
-<tr class="memdesc:ae50789535612abc96d3b9a67bf6ec960"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> read clock register with burst. <br /></td></tr>
+<tr class="memdesc:ae50789535612abc96d3b9a67bf6ec960"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 read clock register with burst. <br /></td></tr>
 <tr class="separator:ae50789535612abc96d3b9a67bf6ec960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5180d9b5ee38ccd136a4e9a5d82597c3"><td class="memItemLeft" align="right" valign="top"><a id="a5180d9b5ee38ccd136a4e9a5d82597c3"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a5180d9b5ee38ccd136a4e9a5d82597c3">DS1302_CMD_WRITE_CLOCK_BURST</a>&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#a1ccf2d2fc9a60901722c032c4596fed2">DS1302_ACB_CLOCK</a> | 0x3E | DS1302_ACB_WRITE)</td></tr>
-<tr class="memdesc:a5180d9b5ee38ccd136a4e9a5d82597c3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> writeclock register with burst. <br /></td></tr>
+<tr class="memdesc:a5180d9b5ee38ccd136a4e9a5d82597c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 writeclock register with burst. <br /></td></tr>
 <tr class="separator:a5180d9b5ee38ccd136a4e9a5d82597c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30b14d53b041defe8573ddc19e1ca76b"><td class="memItemLeft" align="right" valign="top"><a id="a30b14d53b041defe8573ddc19e1ca76b"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a30b14d53b041defe8573ddc19e1ca76b">DS1302_CMD_READ_RAM</a>(addr)&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#af485f398951fbc59758449c781f68f62">DS1302_ACB_RAM</a> | (((addr) &amp; 0x1F) &lt;&lt; 1) | DS1302_ACB_READ)</td></tr>
-<tr class="memdesc:a30b14d53b041defe8573ddc19e1ca76b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> read RAM register. <br /></td></tr>
+<tr class="memdesc:a30b14d53b041defe8573ddc19e1ca76b"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 read RAM register. <br /></td></tr>
 <tr class="separator:a30b14d53b041defe8573ddc19e1ca76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8610d8cf6ba0608ae89ac5e0d422b68a"><td class="memItemLeft" align="right" valign="top"><a id="a8610d8cf6ba0608ae89ac5e0d422b68a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a8610d8cf6ba0608ae89ac5e0d422b68a">DS1302_CMD_WRITE_RAM</a>(addr)&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#af485f398951fbc59758449c781f68f62">DS1302_ACB_RAM</a> | (((addr) &amp; 0x1F) &lt;&lt; 1) | DS1302_ACB_WRITE)</td></tr>
-<tr class="memdesc:a8610d8cf6ba0608ae89ac5e0d422b68a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> write RAM register. <br /></td></tr>
+<tr class="memdesc:a8610d8cf6ba0608ae89ac5e0d422b68a"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 write RAM register. <br /></td></tr>
 <tr class="separator:a8610d8cf6ba0608ae89ac5e0d422b68a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a941ca3f77348cf68c4ee70970e99f7ae"><td class="memItemLeft" align="right" valign="top"><a id="a941ca3f77348cf68c4ee70970e99f7ae"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a941ca3f77348cf68c4ee70970e99f7ae">DS1302_CMD_READ_RAM_BURST</a>&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#af485f398951fbc59758449c781f68f62">DS1302_ACB_RAM</a> | 0x3E | DS1302_ACB_READ)</td></tr>
-<tr class="memdesc:a941ca3f77348cf68c4ee70970e99f7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> read RAM register with burst. <br /></td></tr>
+<tr class="memdesc:a941ca3f77348cf68c4ee70970e99f7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 read RAM register with burst. <br /></td></tr>
 <tr class="separator:a941ca3f77348cf68c4ee70970e99f7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6f1e158cdc535d852553125c14ba535"><td class="memItemLeft" align="right" valign="top"><a id="ac6f1e158cdc535d852553125c14ba535"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#ac6f1e158cdc535d852553125c14ba535">DS1302_CMD_WRITE_RAM_BURST</a>&#160;&#160;&#160;(<a class="el" href="_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7">DS1302_ACB</a> | <a class="el" href="_erriez_d_s1302_8h.html#af485f398951fbc59758449c781f68f62">DS1302_ACB_RAM</a> | 0x3E | DS1302_ACB_WRITE)</td></tr>
-<tr class="memdesc:ac6f1e158cdc535d852553125c14ba535"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> write RAM register with burst. <br /></td></tr>
+<tr class="memdesc:ac6f1e158cdc535d852553125c14ba535"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 write RAM register with burst. <br /></td></tr>
 <tr class="separator:ac6f1e158cdc535d852553125c14ba535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad90def0d6680961a3ecfa479da93c8a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#ad90def0d6680961a3ecfa479da93c8a6">DS1302_REG_SECONDS</a>&#160;&#160;&#160;0x00</td></tr>
-<tr class="memdesc:ad90def0d6680961a3ecfa479da93c8a6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> registers.  <a href="#ad90def0d6680961a3ecfa479da93c8a6">More...</a><br /></td></tr>
+<tr class="memdesc:ad90def0d6680961a3ecfa479da93c8a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 registers.  <a href="#ad90def0d6680961a3ecfa479da93c8a6">More...</a><br /></td></tr>
 <tr class="separator:ad90def0d6680961a3ecfa479da93c8a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afba5b39f9d6752d2dea278a6092652a4"><td class="memItemLeft" align="right" valign="top"><a id="afba5b39f9d6752d2dea278a6092652a4"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#afba5b39f9d6752d2dea278a6092652a4">DS1302_REG_MINUTES</a>&#160;&#160;&#160;0x01</td></tr>
@@ -193,10 +191,10 @@ Macros</h2></td></tr>
 <tr class="separator:a8bf70caf0ae83ebcaa403985baca25ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9d934880f3379334d3e8659852f21ad"><td class="memItemLeft" align="right" valign="top"><a id="ad9d934880f3379334d3e8659852f21ad"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#ad9d934880f3379334d3e8659852f21ad">NUM_DS1302_RAM_REGS</a>&#160;&#160;&#160;31</td></tr>
-<tr class="memdesc:ad9d934880f3379334d3e8659852f21ad"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> number of RAM registers. <br /></td></tr>
+<tr class="memdesc:ad9d934880f3379334d3e8659852f21ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 number of RAM registers. <br /></td></tr>
 <tr class="separator:ad9d934880f3379334d3e8659852f21ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2557fffeeee25e37869fe980bdc79c14"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a2557fffeeee25e37869fe980bdc79c14">DS1302_BIT_CH</a>&#160;&#160;&#160;7</td></tr>
-<tr class="memdesc:a2557fffeeee25e37869fe980bdc79c14"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> register bit defines.  <a href="#a2557fffeeee25e37869fe980bdc79c14">More...</a><br /></td></tr>
+<tr class="memdesc:a2557fffeeee25e37869fe980bdc79c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 register bit defines.  <a href="#a2557fffeeee25e37869fe980bdc79c14">More...</a><br /></td></tr>
 <tr class="separator:a2557fffeeee25e37869fe980bdc79c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ebfcf5997c8387152ad790277bdc8b7"><td class="memItemLeft" align="right" valign="top"><a id="a4ebfcf5997c8387152ad790277bdc8b7"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a4ebfcf5997c8387152ad790277bdc8b7">DS1302_BIT_WP</a>&#160;&#160;&#160;7</td></tr>
@@ -268,7 +266,7 @@ Macros</h2></td></tr>
 <tr class="separator:ad3d95bae6f01464ed93a059a70705db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> RTC library for Arduino. </p>
+<div class="textblock"><p>DS1302 RTC library for Arduino. </p>
 <p>Source: <a href="https://github.com/Erriez/ErriezDS1302">https://github.com/Erriez/ErriezDS1302</a> Documentation: <a href="https://erriez.github.io/ErriezDS1302">https://erriez.github.io/ErriezDS1302</a> </p>
 
 <p class="definition">Definition in file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
@@ -285,10 +283,10 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> address/command register. </p>
+<p>DS1302 address/command register. </p>
 <p>Address command date/time </p>
 
-<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00039">39</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00040">40</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
 
 </div>
 </div>
@@ -304,10 +302,10 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> register bit defines. </p>
+<p>DS1302 register bit defines. </p>
 <p>Clock halt bit </p>
 
-<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00077">77</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00078">78</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
 
 </div>
 </div>
@@ -323,10 +321,10 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_d_s1302.html" title="DS1302 RTC class. ">DS1302</a> registers. </p>
+<p>DS1302 registers. </p>
 <p>Seconds register </p>
 
-<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00063">63</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00064">64</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
 
 </div>
 </div>

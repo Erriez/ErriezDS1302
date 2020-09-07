@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Erriez DHT22 library for Arduino: Class Members - Functions</title>
+<title>Erriez DS1302 RTC library for Arduino: Class Members - Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,12 +20,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="DHT22_Arduino_UNO.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="DS1302.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Erriez DHT22 library for Arduino
-   &#160;<span id="projectnumber">1.2.0</span>
+   <div id="projectname">Erriez DS1302 RTC library for Arduino
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
-   <div id="projectbrief">AM2302/AM2303 DHT22 temperature and humidity sensor library for Arduino</div>
+   <div id="projectbrief">DS1302 RTC library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -62,77 +62,56 @@ $(function() {
 
 <div class="contents">
 &#160;<ul>
-<li>bcdToDec()
-: <a class="el" href="class_d_s1302.html#ac9d7e091afa27d4689ecd0c709841839">DS1302</a>
-</li>
 <li>begin()
-: <a class="el" href="class_d_s1302.html#a2a224cc4638a850a7ef7af6385d22817">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#aa23675eabdc00352b82e69a405079586">ErriezDS1302</a>
 </li>
-<li>decToBcd()
-: <a class="el" href="class_d_s1302.html#a916547c2828a476e52977fc507c12c84">DS1302</a>
+<li>clockEnable()
+: <a class="el" href="class_erriez_d_s1302.html#ab00e55569704e70b2029f8834e20079e">ErriezDS1302</a>
 </li>
-<li>DS1302()
-: <a class="el" href="class_d_s1302.html#ae7f11fc2a6a8333df47be5f8996729e7">DS1302</a>
+<li>ErriezDS1302()
+: <a class="el" href="class_erriez_d_s1302.html#afebc2dfe37010ef7ce4153e543113a69">ErriezDS1302</a>
 </li>
-<li>getDateTime()
-: <a class="el" href="class_d_s1302.html#a6ad83d1a3774ade1257d75155c6a746c">DS1302</a>
+<li>getEpoch()
+: <a class="el" href="class_erriez_d_s1302.html#a27c646475aab12bd293d7c4a22c7273a">ErriezDS1302</a>
 </li>
 <li>getTime()
-: <a class="el" href="class_d_s1302.html#a03f38bfe4805e6a1bf515b7a0d5f4461">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#aaf72f5019c708f28b701bc81d1baa2fa">ErriezDS1302</a>
 </li>
-<li>halt()
-: <a class="el" href="class_d_s1302.html#a7d397e8c06e3f11c0b975c4157a14bdf">DS1302</a>
+<li>isRunning()
+: <a class="el" href="class_erriez_d_s1302.html#a78a77fa612410317a082fba7d17eaf2a">ErriezDS1302</a>
 </li>
-<li>isHalted()
-: <a class="el" href="class_d_s1302.html#a7a11050b7379f8d23083fec59f5f7d50">DS1302</a>
-</li>
-<li>isWriteProtected()
-: <a class="el" href="class_d_s1302.html#a72edd217b42eb23576e6d63c8a560f17">DS1302</a>
-</li>
-<li>readBuffer()
-: <a class="el" href="class_d_s1302.html#ae21054c896c91e8b92496945ad50d930">DS1302</a>
+<li>read()
+: <a class="el" href="class_erriez_d_s1302.html#af66b41091b5f8e121cb787b869898ee6">ErriezDS1302</a>
 </li>
 <li>readBufferRAM()
-: <a class="el" href="class_d_s1302.html#a78b90f6f87fde5258d71fc0d56f7abc7">DS1302</a>
-</li>
-<li>readByte()
-: <a class="el" href="class_d_s1302.html#aa505de55e1cd5605417de24917d820d5">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#ab645cebdca18d961e8a28c408f14dbf3">ErriezDS1302</a>
 </li>
 <li>readByteRAM()
-: <a class="el" href="class_d_s1302.html#adfd2a9c599d90e2c3484d6507831fce3">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#ada01e48cd1553402b03cb30149c4aedf">ErriezDS1302</a>
 </li>
-<li>readClockRegister()
-: <a class="el" href="class_d_s1302.html#a8856bd9b089bc6aec65033b48c3a5688">DS1302</a>
+<li>readRegister()
+: <a class="el" href="class_erriez_d_s1302.html#a63f024d4894b4c4915149016bc3ecf41">ErriezDS1302</a>
 </li>
 <li>setDateTime()
-: <a class="el" href="class_d_s1302.html#af947e2773a2c049ff9c1ca975c4f00a0">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#aa7f0e534d29185ecd4de9fb5f4e2d72a">ErriezDS1302</a>
+</li>
+<li>setEpoch()
+: <a class="el" href="class_erriez_d_s1302.html#a9adbbe5c96d9ceee6b4edaa069ccb2d7">ErriezDS1302</a>
 </li>
 <li>setTime()
-: <a class="el" href="class_d_s1302.html#aca174e400c6288e75a13373e39cb74e2">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#a51400289ead7d8d53404aeb156ee0b07">ErriezDS1302</a>
 </li>
-<li>transferBegin()
-: <a class="el" href="class_d_s1302.html#a0aa42be930e0635baf0d4976cb991a42">DS1302</a>
-</li>
-<li>transferEnd()
-: <a class="el" href="class_d_s1302.html#af36b0bc4707aa63a323c6de803194e91">DS1302</a>
-</li>
-<li>writeAddrCmd()
-: <a class="el" href="class_d_s1302.html#a96a8e9adc377002676073f7a962baa75">DS1302</a>
+<li>write()
+: <a class="el" href="class_erriez_d_s1302.html#aae5ea1f8333e59891efc1a033f52a1b1">ErriezDS1302</a>
 </li>
 <li>writeBufferRAM()
-: <a class="el" href="class_d_s1302.html#aef19576dfccf8c6bf976e3f7cce2f0a9">DS1302</a>
-</li>
-<li>writeByte()
-: <a class="el" href="class_d_s1302.html#a622660d97d7309e5f2be3d48d2157b56">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#a5b6685824d1f143886fd6f75734560ee">ErriezDS1302</a>
 </li>
 <li>writeByteRAM()
-: <a class="el" href="class_d_s1302.html#a326ccf7e4ac45d57d432ba9e5409e0a0">DS1302</a>
+: <a class="el" href="class_erriez_d_s1302.html#a4be79f330b10bdf6ad14c129475c7430">ErriezDS1302</a>
 </li>
-<li>writeClockRegister()
-: <a class="el" href="class_d_s1302.html#a30a2d4d56c559b266b98a7a3920288de">DS1302</a>
-</li>
-<li>writeProtect()
-: <a class="el" href="class_d_s1302.html#abb5fdad141ff792fa2d0edb308b83903">DS1302</a>
+<li>writeRegister()
+: <a class="el" href="class_erriez_d_s1302.html#a6bc49bb09705fe9d99d94c5ea8134fbb">ErriezDS1302</a>
 </li>
 </ul>
 </div><!-- contents -->

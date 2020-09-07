@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['daymonth',['dayMonth',['../struct_d_s1302___date_time.html#acfb491b31c993fb66c166d29f7e4dbbd',1,'DS1302_DateTime']]],
-  ['dayweek',['dayWeek',['../struct_d_s1302___date_time.html#a6a808f7780570d6684dba47e1d043358',1,'DS1302_DateTime']]],
-  ['dectobcd',['decToBcd',['../class_d_s1302.html#a916547c2828a476e52977fc507c12c84',1,'DS1302']]],
-  ['ds1302',['DS1302',['../class_d_s1302.html',1,'DS1302'],['../class_d_s1302.html#ae7f11fc2a6a8333df47be5f8996729e7',1,'DS1302::DS1302()']]],
   ['ds1302_5facb',['DS1302_ACB',['../_erriez_d_s1302_8h.html#a13c23218f58fa87717c3b0f23cbdefe7',1,'ErriezDS1302.h']]],
   ['ds1302_5facb_5fclock',['DS1302_ACB_CLOCK',['../_erriez_d_s1302_8h.html#a1ccf2d2fc9a60901722c032c4596fed2',1,'ErriezDS1302.h']]],
   ['ds1302_5facb_5fram',['DS1302_ACB_RAM',['../_erriez_d_s1302_8h.html#af485f398951fbc59758449c781f68f62',1,'ErriezDS1302.h']]],
@@ -28,7 +24,6 @@ var searchData=
   ['ds1302_5fcmd_5fwrite_5fclock_5freg',['DS1302_CMD_WRITE_CLOCK_REG',['../_erriez_d_s1302_8h.html#ab69db7c5560712cf52a8c3117adb23b4',1,'ErriezDS1302.h']]],
   ['ds1302_5fcmd_5fwrite_5fram',['DS1302_CMD_WRITE_RAM',['../_erriez_d_s1302_8h.html#a8610d8cf6ba0608ae89ac5e0d422b68a',1,'ErriezDS1302.h']]],
   ['ds1302_5fcmd_5fwrite_5fram_5fburst',['DS1302_CMD_WRITE_RAM_BURST',['../_erriez_d_s1302_8h.html#ac6f1e158cdc535d852553125c14ba535',1,'ErriezDS1302.h']]],
-  ['ds1302_5fdatetime',['DS1302_DateTime',['../struct_d_s1302___date_time.html',1,'']]],
   ['ds1302_5fio_5fhigh',['DS1302_IO_HIGH',['../_erriez_d_s1302_8h.html#ae138d32a0419e525b72c4eeeeed755a7',1,'ErriezDS1302.h']]],
   ['ds1302_5fio_5finput',['DS1302_IO_INPUT',['../_erriez_d_s1302_8h.html#a62ae89e5329205fb203e3f9715dfb730',1,'ErriezDS1302.h']]],
   ['ds1302_5fio_5flow',['DS1302_IO_LOW',['../_erriez_d_s1302_8h.html#af3503fca121bd421de3d73627e76b15a',1,'ErriezDS1302.h']]],
