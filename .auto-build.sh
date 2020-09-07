@@ -19,6 +19,7 @@ function autobuild()
 
     echo "Installing library dependencies"
     platformio lib --global install https://github.com/Erriez/ErriezTimestamp.git
+    platformio lib --global install https://github.com/Erriez/ErriezSerialTerminal
 
     echo "Building examples..."
     platformio ci --lib="examples/ErriezDS1302Alarm" --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezDS1302Alarm/ErriezDS1302Alarm.ino
