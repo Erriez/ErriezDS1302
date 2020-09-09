@@ -298,9 +298,9 @@ to calculate with date/time and port the application to different platforms. See
 
 ## Library installation
 
-Please refer to the [Wiki](https://github.com/Erriez/ErriezArduinoLibrariesAndSketches/wiki) page.
+Please refer to the [Wiki](https://github.com/Erriez/ErriezArduinoLibraries/wiki) page.
 
 
-## Other Arduino Libraries and Sketches from Erriez
+## More Arduino Libraries from Erriez
 
-* [Erriez Libraries and Sketches](https://github.com/Erriez/ErriezArduinoLibrariesAndSketches)
+* [Erriez Libraries](https://github.com/Erriez/ErriezArduinoLibraries)
