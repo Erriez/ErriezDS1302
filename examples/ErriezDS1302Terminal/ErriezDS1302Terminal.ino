@@ -56,7 +56,7 @@
 #endif
 
 // Create DS1302 RTC object
-ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+ErriezDS1302 rtc = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 // Newline character '\r' or '\n'
 char newlineChar = '\n';
@@ -174,7 +174,7 @@ void cmdPrintDate()
     Serial.print(F("Date: "));
 
     // Read date/time from RTC
-    if (!ds1302.read(&dt)) {
+    if (!rtc.read(&dt)) {
         Serial.println(F("Error: Read date/time failed"));
         return;
     }
@@ -201,7 +201,7 @@ void cmdPrintTime()
     Serial.print(F("Time: "));
 
     // Read time from RTC
-    if (!ds1302.getTime(&hour, &minute, &second)) {
+    if (!rtc.getTime(&hour, &minute, &second)) {
         Serial.println(F("Error: Read time failed"));
         return;
     }
@@ -217,7 +217,7 @@ void cmdPrintDateTime()
     char buf[11];
 
     // Read date/time from RTC
-    if (!ds1302.read(&dt)) {
+    if (!rtc.read(&dt)) {
         Serial.println(F("Error: Read date/time failed"));
         return;
     }
@@ -234,7 +234,7 @@ void cmdPrintEpoch()
 {
     // Print 32-bit epoch time
     Serial.print(F("Epoch: "));
-    Serial.println((uint32_t)ds1302.getEpoch());
+    Serial.println((uint32_t)rtc.getEpoch());
 }
 
 void cmdSetDateTime()
@@ -255,12 +255,12 @@ void cmdSetDateTime()
         arg = term.getRemaining();
         if (arg != NULL) {
             if (sscanf(arg, "%d %d-%d-%d", &dayWeek, &dayMonth, &month, &year) == 4) {
-                ds1302.read(&dt);
+                rtc.read(&dt);
                 dt.tm_wday = dayWeek;
                 dt.tm_mday = dayMonth;
                 dt.tm_mon = month - 1;
                 dt.tm_year = year - 1900;
-                ds1302.write(&dt);
+                rtc.write(&dt);
                 Serial.print(F("Set date: "));
                 Serial.println(arg);
             } else {
@@ -271,7 +271,7 @@ void cmdSetDateTime()
         arg = term.getRemaining();
         if (arg != NULL) {
             if (sscanf(arg, "%d:%d:%d", &hour, &minute, &second) == 3) {
-                ds1302.setTime(hour, minute, second);
+                rtc.setTime(hour, minute, second);
                 Serial.print(F("Set time: "));
                 Serial.println(arg);
             } else {
@@ -282,7 +282,7 @@ void cmdSetDateTime()
         arg = term.getRemaining();
         if (arg != NULL) {
             if (sscanf(arg, "%lu", &epoch) == 1) {
-                ds1302.setEpoch((time_t)epoch);
+                rtc.setEpoch((time_t)epoch);
                 Serial.print(F("Set epoch: "));
                 Serial.println((uint32_t)epoch);
             } else {
@@ -296,16 +296,16 @@ void cmdSetDateTime()
 
 void cmdOscillatorStop()
 {
-    Serial.println(F("Stop oscillator when running on V-BAT"));
+    Serial.println(F("Stop oscillator"));
 
-    ds1302.clockEnable(false);
+    rtc.clockEnable(false);
 }
 
 void cmdOscillatorStart()
 {
     Serial.println(F("Start oscillator"));
 
-    ds1302.clockEnable(true);
+    rtc.clockEnable(true);
 }
 
 void cmdWriteRegister()
@@ -324,7 +324,7 @@ void cmdWriteRegister()
         return;
     }
 
-    ds1302.writeRegister(reg, val);
+    rtc.writeRegister(reg, val);
     Serial.print(F("Write reg "));
     snprintf(buf, sizeof(buf), "0x%02x: 0x%02x", reg, val);
     Serial.println(buf);
@@ -341,7 +341,7 @@ void cmdReadRegister()
     }
 
     Serial.print(F("Read reg "));
-    snprintf(buf, sizeof(buf), "0x%02x: 0x%02x", reg, ds1302.readRegister(reg));
+    snprintf(buf, sizeof(buf), "0x%02x: 0x%02x", reg, rtc.readRegister(reg));
     Serial.println(buf);
 }
 
@@ -351,7 +351,7 @@ void printDateTime()
     char buf[32];
 
     // Read date/time from RTC
-    if (!ds1302.read(&dt)) {
+    if (!rtc.read(&dt)) {
         Serial.println(F("Error: Read date/time failed"));
         return;
     }
@@ -395,17 +395,17 @@ void setup()
     term.addCommand("r", cmdReadRegister);
 
     // Initialize RTC
-    while (!ds1302.begin()) {
+    while (!rtc.begin()) {
         Serial.println(F("DS1302 RTC not found"));
         delay(3000);
     }
 
     // Check oscillator status
-    if (!ds1302.isRunning()) {
-        Serial.println(F("Warning: DS1302 RTC oscillator was stopped."));
+    if (!rtc.isRunning()) {
+        Serial.println(F("Warning: RTC clock was stopped."));
 
         // Enable oscillator
-        ds1302.clockEnable(true);
+        rtc.clockEnable(true);
     }
 }
 

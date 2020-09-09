@@ -69,7 +69,7 @@ void setup()
 
     // Initialize RTC
     while (!ds1302.begin()) {
-        Serial.println(F("Error: DS1302 not found"));
+        Serial.println(F("RTC not found"));
         delay(3000);
     }
 

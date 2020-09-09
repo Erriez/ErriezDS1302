@@ -23,7 +23,7 @@
  */
 
 /*!
- * \file ErriezDS1302.h
+ * \file ErriezDS1302.cpp
  * \brief DS1302 RTC library for Arduino
  * \details
  *      Source:         https://github.com/Erriez/ErriezDS1302
@@ -63,7 +63,7 @@ ErriezDS1302::ErriezDS1302(uint8_t clkPin, uint8_t ioPin, uint8_t cePin)
  * \details
  *      Call this function from setup().
  * \retval true
- *      RTC detected and clock is running.
+ *      RTC detected.
  * \retval false
  *      RTC not detected.
  */
@@ -92,32 +92,46 @@ bool ErriezDS1302::begin()
         return false;
     }
 
+    // DS1302 detected
     return true;
 }
 
 /*!
- * \brief Read RTC CH (Clock Halt) from seconds register
+ * \brief Read RTC CH (Clock Halt) from seconds register.
+ * \details
+ *      The application is responsible for checking the CH (Clock Halt) bit before reading
+ *      date/time date. This function may be used to judge the validity of the date/time registers.
  * \retval true
- *      RTC clock is running
+ *      RTC clock is running.
  * \retval false
- *      RTC clock is halted
+ *      The date/time data is invalid when the CH bit is set. The application should enable the
+ *      oscillator, or program a new date/time.
  */
 bool ErriezDS1302::isRunning()
 {
-    // Return status CH bit from seconds register
-    if (readRegister(DS1302_REG_SECONDS) & (1 << DS1302_BIT_CH)) {
+    // Return status CH (Clock Halt) bit from seconds register
+    if (readRegister(DS1302_REG_SECONDS) & (1 << DS1302_SEC_CH)) {
+        // RTC clock stopped
         return false;
     } else {
+        // RTC clock is running
         return true;
     }
 }
 
 /*!
- * \brief Start RTC clock
+ * \brief Enable or disable oscillator.
  * \details
- *      Clear CH (Clock Halt) bit to seconds register
+ *      Clear or set CH (Clock Halt) bit to seconds register
+ * \param enable
+ *      true:  Enable RTC clock.\n
+ *      false: Stop RTC clock.
+ * \retval true
+ *      Success.
+ * \retval false
+ *      Oscillator enable failed.
  */
-void ErriezDS1302::clockEnable(bool enable)
+bool ErriezDS1302::clockEnable(bool enable)
 {
     uint8_t regSeconds;
 
@@ -127,14 +141,14 @@ void ErriezDS1302::clockEnable(bool enable)
     // Set or clear HT bit
     if (enable) {
         // Clear to enable
-        regSeconds &= ~(1 << DS1302_BIT_CH);
+        regSeconds &= ~(1 << DS1302_SEC_CH);
     } else {
         // Set to disable
-        regSeconds |= (1 << DS1302_BIT_CH);
+        regSeconds |= (1 << DS1302_SEC_CH);
     }
 
     // Write seconds register
-    writeRegister(DS1302_REG_SECONDS, regSeconds);
+    return writeRegister(DS1302_REG_SECONDS, regSeconds);
 }
 
 /*!
@@ -169,10 +183,12 @@ time_t ErriezDS1302::getEpoch()
  * \brief Write Unix epoch UTC time to RTC
  * \param t
  *      time_t time
- * \return
- *      See write returns.
+ * \retval true
+ *      Success.
+ * \retval false
+ *      Set epoch failed.
  */
-void ErriezDS1302::setEpoch(time_t t)
+bool ErriezDS1302::setEpoch(time_t t)
 {
     struct tm *dt;
 
@@ -185,23 +201,30 @@ void ErriezDS1302::setEpoch(time_t t)
     dt = gmtime(&t);
 
     // Write date/time to RTC
-    write(dt);
+    return write(dt);
 }
 
 /*!
- * \brief Get RTC date and time
+ * \brief Read date and time from RTC.
+ * \details
+ *      Read all RTC registers at once to prevent a time/date register change in the middle of the
+ *      register read operation.
  * \param dt
- *      Date and time structure
+ *      Date and time struct tm.
+ * \retval true
+ *      Success
+ * \retval false
+ *      Read failed.
  */
 bool ErriezDS1302::read(struct tm *dt)
 {
-    uint8_t buffer[7];
+    uint8_t buffer[DS1302_NUM_CLOCK_REGS];
 
     // Read clock date and time registers
-    transferBegin();
-    writeAddrCmd(DS1302_CMD_READ_CLOCK_BURST);
-    readBuffer(&buffer, sizeof(buffer));
-    transferEnd();
+    if (!readBuffer(0x00, buffer, sizeof(buffer))) {
+        memset(dt, 0, sizeof(struct tm));
+        return false;
+    }
 
     // Clear dt
     memset(dt, 0, sizeof(struct tm));
@@ -209,9 +232,9 @@ bool ErriezDS1302::read(struct tm *dt)
     // Convert BCD buffer to Decimal
     dt->tm_sec = bcdToDec(buffer[0] & 0x7F);
     dt->tm_min = bcdToDec(buffer[1] & 0x7F);
-    dt->tm_hour = bcdToDec(buffer[2] & 0x3f);
+    dt->tm_hour = bcdToDec(buffer[2] & 0x3F);
     dt->tm_mday = bcdToDec(buffer[3] & 0x3F);
-    dt->tm_mon = bcdToDec(buffer[4] & 0x1f);
+    dt->tm_mon = bcdToDec(buffer[4] & 0x1F);
     dt->tm_wday = bcdToDec(buffer[5] & 0x07);
     dt->tm_year = bcdToDec(buffer[6]) + 100; // 2000-1900
 
@@ -243,21 +266,28 @@ bool ErriezDS1302::read(struct tm *dt)
  *      register write operation. This function enables the oscillator.
  * \param dt
  *      Date/time struct tm. Providing invalid date/time data may result in unpredictable behavior.
+ * \retval true
+ *      Success.
+ * \retval false
+ *      Write failed.
  */
-void ErriezDS1302::write(const struct tm *dt)
+bool ErriezDS1302::write(const struct tm *dt)
 {
-    // Write clock registers(always 24H)
-    transferBegin();
-    writeAddrCmd(DS1302_CMD_WRITE_CLOCK_BURST);
-    writeByte(decToBcd(dt->tm_sec) & 0x7F); // Remove CH bit
-    writeByte(decToBcd(dt->tm_min) & 0x7F);
-    writeByte(decToBcd(dt->tm_hour) & 0x3F);
-    writeByte(decToBcd(dt->tm_mday) & 0x3F);
-    writeByte(decToBcd(dt->tm_mon + 1) & 0x1F);
-    writeByte(decToBcd(dt->tm_wday + 1) & 0x07);
-    writeByte(decToBcd(dt->tm_year % 100));
-    writeByte(0); // Including write protect = 0
-    transferEnd();
+    // Buffer including write protect = 0
+    uint8_t buffer[DS1302_NUM_CLOCK_REGS + 1];
+
+    // Encode date time from decimal to BCD
+    buffer[0] = decToBcd(dt->tm_sec) & 0x7F; // Clear CH bit in seconds register
+    buffer[1] = decToBcd(dt->tm_min) & 0x7F;
+    buffer[2] = decToBcd(dt->tm_hour) & 0x3F;
+    buffer[3] = decToBcd(dt->tm_mday) & 0x3F;
+    buffer[4] = decToBcd(dt->tm_mon + 1) & 0x1F;
+    buffer[5] = decToBcd(dt->tm_wday + 1) & 0x07;
+    buffer[6] = decToBcd(dt->tm_year % 100);
+    buffer[7] = 0; // Write protect register
+
+    // Write BCD encoded buffer to RTC registers
+    return writeBuffer(0x00, buffer, sizeof(buffer));
 }
 
 /*!
@@ -275,15 +305,20 @@ void ErriezDS1302::write(const struct tm *dt)
  * \retval false
  *      Set time failed.
  */
-void ErriezDS1302::setTime(uint8_t hour, uint8_t min, uint8_t sec)
+bool ErriezDS1302::setTime(uint8_t hour, uint8_t min, uint8_t sec)
 {
     struct tm dt;
 
+    // Read date/time from RTC
     read(&dt);
+
+    // Update time
     dt.tm_hour = hour;
     dt.tm_min = min;
     dt.tm_sec = sec;
-    write(&dt);
+
+    // Write date/time to RTC
+    return write(&dt);
 }
 
 /*!
@@ -303,26 +338,17 @@ void ErriezDS1302::setTime(uint8_t hour, uint8_t min, uint8_t sec)
  */
 bool ErriezDS1302::getTime(uint8_t *hour, uint8_t *min, uint8_t *sec)
 {
-    uint8_t buffer[3];
+    struct tm dt;
 
-    // Read RTC time registers
-    transferBegin();
-    writeAddrCmd(DS1302_CMD_READ_CLOCK_BURST);
-    readBuffer(&buffer, sizeof(buffer));
-    transferEnd();
-
-    // Convert BCD buffer to Decimal
-    *sec = bcdToDec(buffer[0] & 0x7f); // Without CH bit from seconds register
-    *min = bcdToDec(buffer[1] & 0x7F);
-    *hour = bcdToDec(buffer[2] & 0x3F);
-
-    // Check buffer for valid data
-    if ((*sec > 59) || (*min > 59) || (*hour > 23)) {
-        *sec = 0x00;
-        *min = 0x00;
-        *hour = 0x00;
+    // Read date/time from RTC
+    if (!read(&dt)) {
         return false;
     }
+
+    // Set return values
+    *hour = dt.tm_hour;
+    *min = dt.tm_min;
+    *sec = dt.tm_sec;
 
     return true;
 }
@@ -346,11 +372,11 @@ bool ErriezDS1302::getTime(uint8_t *hour, uint8_t *min, uint8_t *sec)
  * \retval true
  *      Success.
  * \retval false
- *      Set time failed.
+ *      Set date/time failed.
  */
-void ErriezDS1302::setDateTime(uint8_t hour, uint8_t min, uint8_t sec,
-                 uint8_t mday, uint8_t mon, uint16_t year,
-                 uint8_t wday)
+bool ErriezDS1302::setDateTime(uint8_t hour, uint8_t min, uint8_t sec,
+                               uint8_t mday, uint8_t mon, uint16_t year,
+                               uint8_t wday)
 {
     struct tm dt;
 
@@ -364,7 +390,51 @@ void ErriezDS1302::setDateTime(uint8_t hour, uint8_t min, uint8_t sec,
     dt.tm_wday = wday;
 
     // Write date/time to RTC
-    write(&dt);
+    return write(&dt);
+}
+
+/*!
+ * \brief Get date time
+ * \param hour
+ *      Hours 0..23
+ * \param min
+ *      Minutes 0..59
+ * \param sec
+ *      Seconds 0..59
+ * \param mday
+ *      Day of the month 1..31
+ * \param mon
+ *      Month 1..12 (1=January)
+ * \param year
+ *      Year 2000..2099
+ * \param wday
+ *      Day of the week 0..6 (0=Sunday, .. 6=Saturday)
+ * \retval true
+ *      Success.
+ * \retval false
+ *      Get date/time failed.
+ */
+bool ErriezDS1302::getDateTime(uint8_t *hour, uint8_t *min, uint8_t *sec,
+                               uint8_t *mday, uint8_t *mon, uint16_t *year,
+                               uint8_t *wday)
+{
+    struct tm dt;
+
+    // Read date/time from RTC
+    if (!read(&dt)) {
+        return false;
+    }
+
+    // Set return values
+    *hour = dt.tm_hour;
+    *min = dt.tm_min;
+    *sec = dt.tm_sec;
+    *mday = dt.tm_mday;
+    *mon = dt.tm_mon + 1;
+    *year = dt.tm_year + 1900;
+    *wday = dt.tm_wday;
+
+    return true;
 }
 
 /*!
@@ -393,7 +463,7 @@ void ErriezDS1302::writeBufferRAM(uint8_t *buf, uint8_t len)
 {
     transferBegin();
     writeAddrCmd(DS1302_CMD_WRITE_RAM_BURST);
-    for (uint8_t i = 0; i < min((int)len, NUM_DS1302_RAM_REGS); i++) {
+    for (uint8_t i = 0; i < min((int)len, DS1302_NUM_RAM_REGS); i++) {
         writeByte(*buf++);
     }
     transferEnd();
@@ -429,55 +499,18 @@ void ErriezDS1302::readBufferRAM(uint8_t *buf, uint8_t len)
 {
     transferBegin();
     writeAddrCmd(DS1302_CMD_READ_RAM_BURST);
-    for (uint8_t i = 0; i < min((int)len, NUM_DS1302_RAM_REGS); i++) {
+    for (uint8_t i = 0; i < min((int)len, DS1302_NUM_RAM_REGS); i++) {
         *buf++ = readByte();
     }
     transferEnd();
 }
 
 /*!
- * \brief Write clock register
- * \param reg
- *      RTC clock register (See datasheet)
- * \param value
- *      Register value (See datasheet)
- */
-void ErriezDS1302::writeRegister(uint8_t reg, uint8_t value)
-{
-    transferBegin();
-    writeAddrCmd((uint8_t)DS1302_CMD_WRITE_CLOCK_REG(reg));
-    writeByte(value);
-    transferEnd();
-}
-
-/*!
- * \brief Read clock register
- * \param reg
- *      RTC clock register (See datasheet)
- * \return
- *      Register value (See datasheet)
- */
-uint8_t ErriezDS1302::readRegister(uint8_t reg)
-{
-    uint8_t retval;
-
-    transferBegin();
-    writeAddrCmd(DS1302_CMD_READ_CLOCK_REG(reg));
-    retval = readByte();
-    transferEnd();
-
-    return retval;
-}
-
-// -------------------------------------------------------------------------------------------------
-// Private functions
-// -------------------------------------------------------------------------------------------------
-/*!
- * \brief BCD to decimal conversion
+ * \brief BCD to decimal conversion.
  * \param bcd
- *      BCD encoded value
+ *      BCD encoded value.
  * \return
- *      Decimal value
+ *      Decimal value.
  */
 uint8_t ErriezDS1302::bcdToDec(uint8_t bcd)
 {
@@ -485,17 +518,130 @@ uint8_t ErriezDS1302::bcdToDec(uint8_t bcd)
 }
 
 /*!
- * \brief Decimal to BCD conversion
+ * \brief Decimal to BCD conversion.
  * \param dec
- *      Decimal value
+ *      Decimal value.
  * \return
- *      BCD encoded value
+ *      BCD encoded value.
  */
 uint8_t ErriezDS1302::decToBcd(uint8_t dec)
 {
     return (uint8_t)(((dec / 10) << 4) | (dec % 10));
 }
 
+/*!
+ * \brief Read register.
+ * \details
+ *      Please refer to the RTC datasheet.
+ * \param reg
+ *      RTC register number 0x00..0x09.
+ * \returns value
+ *      8-bit unsigned register value.
+ */
+uint8_t ErriezDS1302::readRegister(uint8_t reg)
+{
+    uint8_t value = 0;
+
+    // Read 8-bit unsigned value from clock register
+    transferBegin();
+    writeAddrCmd(DS1302_CMD_READ_CLOCK_REG(reg));
+    value = readByte();
+    transferEnd();
+
+    return value;
+}
+
+/*!
+ * \brief Write register.
+ * \details
+ *      Please refer to the RTC datasheet.
+ * \param reg
+ *      RTC register number 0x00..0x09.
+ * \param value
+ *      8-bit unsigned register value.
+ * \retval true
+ *      Success
+ * \retval false
+ *      Write register failed
+ */
+bool ErriezDS1302::writeRegister(uint8_t reg, uint8_t value)
+{
+    // Write 8-bit unsigned value to clock register
+    transferBegin();
+    writeAddrCmd((uint8_t)DS1302_CMD_WRITE_CLOCK_REG(reg));
+    writeByte(value);
+    transferEnd();
+
+    return true;
+}
+
+/*!
+ * \brief Write buffer to RTC clock registers.
+ * \details
+ *      Please refer to the RTC datasheet.
+ * \param reg
+ *      RTC register number 0x00..0x09.
+ * \param buffer
+ *      Buffer.
+ * \param writeLen
+ *      Buffer length. Writing is only allowed within valid RTC registers.
+ * \retval true
+ *      Success
+ * \retval false
+ *      Write failed.
+ */
+bool ErriezDS1302::writeBuffer(uint8_t reg, void *buffer, uint8_t writeLen)
+{
+    if ((reg != 0) || (writeLen != (DS1302_NUM_CLOCK_REGS + 1))) {
+        // Burst command requires all clock registers including write protect
+        return false;
+    }
+
+    // Write buffer with clock burst command to clock registers
+    transferBegin();
+    writeAddrCmd(DS1302_CMD_WRITE_CLOCK_BURST);
+    for (uint8_t i = 0; i < min((int)writeLen, DS1302_NUM_RAM_REGS); i++) {
+        writeByte(((uint8_t *)buffer)[i]);
+    }
+    transferEnd();
+
+    return true;
+}
+
+/*!
+ * \brief Read buffer from RTC clock registers.
+ * \param reg
+ *      RTC register number 0x00..0x07.
+ * \param buffer
+ *      Buffer.
+ * \param readLen
+ *      Buffer length. Reading is only allowed within valid RTC registers.
+ * \retval true
+ *      Success
+ * \retval false
+ *      Read failed.
+ */
+bool ErriezDS1302::readBuffer(uint8_t reg, void *buffer, uint8_t readLen)
+{
+    if (reg != 0) {
+        // Burst command requires address 0
+        return false;
+    }
+
+    // Read buffer with clock burst command from clock registers
+    transferBegin();
+    writeAddrCmd(DS1302_CMD_READ_CLOCK_BURST);
+    for (uint8_t i = 0; i < min((int)readLen, DS1302_NUM_RAM_REGS); i++) {
+        ((uint8_t *)buffer)[i] = readByte();
+    }
+    transferEnd();
+
+    return true;
+}
+
+// -------------------------------------------------------------------------------------------------
+// Private functions
+// -------------------------------------------------------------------------------------------------
 /*!
  * \brief Start RTC transfer
  */
@@ -585,18 +731,4 @@ uint8_t ErriezDS1302::readByte()
     }
 
     return value;
-}
-
-/*!
- * \brief Read buffer from DS1302
- * \param buf
- *      Buffer
- * \param len
- *      Buffer length
- */
-void ErriezDS1302::readBuffer(void *buf, uint8_t len)
-{
-    for (uint8_t i = 0; i < len; i++) {
-        ((uint8_t *)buf)[i] = readByte();
-    }
 }

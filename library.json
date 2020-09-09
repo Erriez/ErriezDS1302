@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "keywords": "arduino, library, ds1302, i2c, rtc, real-time-clock, date, time, libc, time.h, utc, epoch, ram, documentation, examples, erriez",
     "description": "Erriez DS1307 I2C RTC (Real Time Clock) library for Arduino",
-    "homepage": "https://github.com/Erriez/ErriezArduinoLibrariesAndSketches",
+    "homepage": "https://github.com/Erriez/ErriezDS1302",
     "license": "MIT",
     "authors": {
         "name": "Erriez",

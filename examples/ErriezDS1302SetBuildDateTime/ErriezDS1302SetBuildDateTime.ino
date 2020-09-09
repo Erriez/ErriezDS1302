@@ -51,7 +51,7 @@
 #endif
 
 // Create DS1302 RTC object
-ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+ErriezDS1302 rtc = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 // Global date/time object
 struct tm dt;
@@ -60,13 +60,13 @@ struct tm dt;
 void rtcInit()
 {
     // Initialize RTC
-    while (!ds1302.begin()) {
-        Serial.println(F("Error: DS1302 not found"));
+    while (!rtc.begin()) {
+        Serial.println(F("RTC not found"));
         delay(3000);
     }
 
     // Enable RTC clock
-    ds1302.clockEnable(true);
+    rtc.clockEnable(true);
 }
 
 bool getBuildTime(const char *str)
@@ -140,8 +140,12 @@ bool rtcSetDateTime()
     Serial.println(asctime(&dt));
 
     // Set new date time
-    Serial.println(F("Set RTC date time..."));
-    ds1302.write(&dt);
+    Serial.print(F("Set RTC date time..."));
+    if (!rtc.write(&dt)) {
+        Serial.println(F("FAILED"));
+    } else {
+        Serial.println(F("OK"));
+    }
 
     return true;
 }
@@ -171,7 +175,7 @@ void setup()
 void loop()
 {
     // Get date/time
-    if (!ds1302.read(&dt)) {
+    if (!rtc.read(&dt)) {
         Serial.println(F("RTC read failed"));
     } else {
         Serial.println(asctime(&dt));

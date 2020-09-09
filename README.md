@@ -8,14 +8,14 @@ This is a 3-wire DS1302 RTC (Real Time Clock) library for Arduino.
 
 ## Library features
 
-- libc `<time.h>` compatible
-- Read/write date/time `struct tm`
-- Set/get Unix epoch UTC `time_t`
-- Set/get time (hours, minutes, seconds)
-- Set date and time
-- Read / write 31 Bytes battery backupped RTC RAM.
-- Programmable trickle charge to charge super-caps / lithium batteries.
-- Optimized IO interface for Atmel AVR platform.
+* libc `<time.h>` compatible
+* Read/write date/time `struct tm`
+* Set/get Unix epoch UTC `time_t`
+* Set/get time (hours, minutes, seconds)
+* Set/get date and time (hour, min, sec, mday, mon, year, wday)
+* Read / write 31 Bytes battery backupped RTC RAM.
+* Programmable trickle charge to charge super-caps / lithium batteries.
+* Optimized IO interface for Atmel AVR platform.
 
 ## DS1302 specifications
 
@@ -29,15 +29,16 @@ This is a 3-wire DS1302 RTC (Real Time Clock) library for Arduino.
 
 Arduino IDE | File | Examples | Erriez DS1302 RTC:
 
-- [Alarm](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Alarm/ErriezDS1302Alarm.ino): Program one or more software alarms.
-- [Benchmark](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Benchmark/ErriezDS1302Benchmark.ino): Benchmark library.
-- [GettingStarted](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302DateStrings/ErriezDS1302DateStrings.ino): Date strings in flash example.
-- [RAM](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302RAM/ErriezDS1302RAM.ino): Read/write RTC RAM.
-- [Read](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Read/ErriezDS1302Read.ino) Read example.
-- [SetDateTime](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetDateTime/ErriezDS1302SetDateTime.ino): Set date time.
-- [SetTrickleCharger](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetTrickleCharger/ErriezDS1302SetTrickleCharger.ino): Program trickle battery/capacitor charger.
-- [Terminal](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.ino) and [Python script](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.py) to set date time.
-- [Test](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Test/ErriezDS1302Test.ino): Regression test.
+* [Alarm](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Alarm/ErriezDS1302Alarm.ino): Program one or more software alarms
+* [Benchmark](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Benchmark/ErriezDS1302Benchmark.ino): Benchmark library
+* [RAM](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302RAM/ErriezDS1302RAM.ino): Read/write RTC RAM.
+* [SetBuildDateTime](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetBuildDateTime/ErriezDS1302SetBuildDateTime.ino): Set build date/time
+* [SetGetDateTime](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetGetDateTime/ErriezDS1302SetGetDateTime.ino): Set/get date and time
+* [SetGetTime](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetGetDateTime/ErriezDS1302SetGetTime.ino): Set/get time
+* [SetTrickleCharger](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302SetTrickleCharger/ErriezDS1302SetTrickleCharger.ino): Program trickle battery/capacitor charger
+* [Terminal](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.ino) and [Python script](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Terminal/ErriezDS1302Terminal.py) to set date time
+* [Test](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302Test/ErriezDS1302Test.ino): Regression test
+* [WriteRead](https://github.com/Erriez/ErriezDS1302/blob/master/examples/ErriezDS1302WriteRead/ErriezDS1302WriteRead.ino): Regression test
 
 
 ## Documentation
@@ -78,7 +79,7 @@ void setup()
 {
     // Initialize RTC
     while (!ds1302.begin()) {
-        Serial.println(F("Error: DS1302 not found"));
+        Serial.println(F("RTC not found"));
         delay(3000);
     }
 }
@@ -91,7 +92,7 @@ void setup()
 if (!ds1302.isRunning()) {
     // Error: DS1302 RTC oscillator stopped. Date/time cannot be trusted. 
     // Set new date/time before reading date/time.
-    
+
     // Enable oscillator
     ds1302.clockEnable(true);
 }
@@ -126,10 +127,35 @@ if (!ds1302.setDateTime(13, 45, 9,  31, 12, 2019,  2) {
 }
 ```
 
+**Get date/time**
+
+```c++
+uint8_t hour;
+uint8_t min;
+uint8_t sec;
+uint8_t mday;
+uint8_t mon;
+uint16_t year;
+uint8_t wday;
+
+// Read RTC date/time
+if (!ds1307.getDateTime(&hour, &min, &sec, &mday, &mon, &year, &wday) {
+    // Error: RTC read failed
+}
+
+// hour: 0..23
+// min: 0..59
+// sec: 0..59
+// mday: 1..31
+// mon: 1..12
+// year: 2000..2099
+// wday: 0..6 (0=Sunday .. 6=Saturday)
+```
+
 **Write date/time struct tm**
 
 ```c++
-struct tm dt = {0};
+struct tm dt;
 
 dt.tm_hour = 12;
 dt.tm_min = 34;
@@ -145,7 +171,7 @@ ds1302.write(&dt);
 **Read date/time struct tm**
 
 ```c++
-struct tm dt = {0};
+struct tm dt;
 
 // Read RTC date/time
 if (!ds1307.read(&dt)) {
@@ -244,7 +270,7 @@ The API has been changed to make RTC libraries compatible with libc `time.h`. Th
 to calculate with date/time and port the application to different platforms. See changes below:
 
 | v1.0.0                           | v2.0.0                                                       |
-| -------------------------------- | ------------------------------------------------------------ |
+| -------------------------------* | -----------------------------------------------------------* |
 | `DS1302_DateTime`                | `struct tm`                                                  |
 |                                  | `clearOscillatorStopFlag()` merged into `clockEnable()`      |
 | `isHalted()`                     | `bool clockEnable(bool enable)`                              |
@@ -256,6 +282,7 @@ to calculate with date/time and port the application to different platforms. See
 | `writeProtect()`                 | Removed                                                      |
 | `isProtected()`                  | Removed                                                      |
 |                                  | `void setDateTime(uint8_t hour, uint8_t min, uint8_t sec, uint8_t mday, uint8_t mon, uint16_t year, uint8_t wday)` |
+|                                  | `void getDateTime(uint8_t *hour, uint8_t *min, uint8_t *sec, uint8_t *mday, uint8_t *mon, uint16_t *year, uint8_t *wday)` |
 
 
 ## Library installation

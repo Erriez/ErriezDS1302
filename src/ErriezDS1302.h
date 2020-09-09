@@ -72,10 +72,11 @@
 #define DS1302_REG_TC           0x08    //!< Tickle Charger register
 
 //! DS1302 number of RAM registers
-#define NUM_DS1302_RAM_REGS     31
+#define DS1302_NUM_CLOCK_REGS   7
+#define DS1302_NUM_RAM_REGS     31
 
 //! DS1302 register bit defines
-#define DS1302_BIT_CH           7       //!< Clock halt bit
+#define DS1302_SEC_CH           7       //!< Clock halt bit in seconds register
 #define DS1302_BIT_WP           7       //!< Write protect bit
 #define DS1302_BIT_READ         0       //!< Bit read
 
@@ -127,25 +128,39 @@
 class ErriezDS1302
 {
 public:
+    // Constructor
     ErriezDS1302(uint8_t clkPin, uint8_t ioPin, uint8_t cePin);
     bool begin();
 
+    // Oscillator functions
     bool isRunning();
-    void clockEnable(bool enable=true);
+    bool clockEnable(bool enable=true);
 
     // Set/get date/time
     time_t getEpoch();
-    void setEpoch(time_t t);
+    bool setEpoch(time_t t);
     bool read(struct tm *dt);
-    void write(const struct tm *dt);
-    void setTime(uint8_t hour, uint8_t min, uint8_t sec);
+    bool write(const struct tm *dt);
+    bool setTime(uint8_t hour, uint8_t min, uint8_t sec);
     bool getTime(uint8_t *hour, uint8_t *min, uint8_t *sec);
-    void setDateTime(uint8_t hour, uint8_t min, uint8_t sec,
+    bool setDateTime(uint8_t hour, uint8_t min, uint8_t sec,
                      uint8_t mday, uint8_t mon, uint16_t year,
                      uint8_t wday);
+    bool getDateTime(uint8_t *hour, uint8_t *min, uint8_t *sec,
+                     uint8_t *mday, uint8_t *mon, uint16_t *year,
+                     uint8_t *wday);
 
-    void writeRegister(uint8_t reg, uint8_t value);
+    // BCD conversions
+    uint8_t bcdToDec(uint8_t bcd);
+    uint8_t decToBcd(uint8_t dec);
+
+    // Read/write register
     uint8_t readRegister(uint8_t reg);
+    bool writeRegister(uint8_t reg, uint8_t value);
+
+    // Read/write buffer
+    bool readBuffer(uint8_t reg, void *buffer, uint8_t len);
+    bool writeBuffer(uint8_t reg, void *buffer, uint8_t len);
 
     void writeByteRAM(uint8_t addr, uint8_t value);
     void writeBufferRAM(uint8_t *buf, uint8_t len);
@@ -168,17 +183,12 @@ private:
     uint8_t _cePin;     //!< Chip enable pin
 #endif
 
-    // BCD conversions
-    uint8_t bcdToDec(uint8_t bcd);
-    uint8_t decToBcd(uint8_t dec);
-
     // RTC interface functions
     void transferBegin();
     void transferEnd();
     void writeAddrCmd(uint8_t value);
     void writeByte(uint8_t value);
     uint8_t readByte();
-    void readBuffer(void *buf, uint8_t len);
 };
 
 #endif // ERRIEZ_DS1302_H_

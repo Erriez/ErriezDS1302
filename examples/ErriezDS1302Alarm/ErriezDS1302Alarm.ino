@@ -53,7 +53,7 @@
 #endif
 
 // Create DS1302 RTC object
-ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+ErriezDS1302 rtc = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 
 // Alarm on handler
@@ -93,19 +93,19 @@ void setup()
     while (!Serial) {
         ;
     }
-    Serial.println(F("DS1302 RTC alarm example\n"));
+    Serial.println(F("\nErriez DS1307 software alarm example\n"));
 
     // Initialize RTC
-    while (!ds1302.begin()) {
-        Serial.println(F("Error: DS1302 not found"));
+    while (!rtc.begin()) {
+        Serial.println(F("RTC not found"));
         delay(3000);
     }
 
     // Enable RTC clock
-    ds1302.clockEnable(true);
+    rtc.clockEnable(true);
 
     // Set initial time
-    ds1302.setTime(12, 0, 0);
+    rtc.setTime(12, 0, 0);
 }
 
 void loop()
@@ -116,7 +116,7 @@ void loop()
     uint8_t second;
 
     // Read RTC time
-    if (!ds1302.getTime(&hour, &minute, &second)) {
+    if (!rtc.getTime(&hour, &minute, &second)) {
         Serial.println(F("Error: DS1302 read failed"));
     } else {
         // Print RTC time every second

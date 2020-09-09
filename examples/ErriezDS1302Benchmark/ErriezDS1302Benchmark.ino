@@ -64,7 +64,7 @@ void setup()
     uint8_t hour;
     uint8_t minute;
     uint8_t second;
-    uint8_t buf[NUM_DS1302_RAM_REGS] = { 0xFF };
+    uint8_t buf[DS1302_NUM_RAM_REGS] = { 0xFF };
     time_t t;
 
     // Initialize serial port

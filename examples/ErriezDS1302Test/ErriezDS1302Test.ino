@@ -50,8 +50,8 @@
 #error #error "May work, but not tested on this target"
 #endif
 
-// Create DS1302 RTC object
-ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+// Create RTC object
+ErriezDS1302 rtc = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 #define Success     true
 #define Failure     false
@@ -80,34 +80,37 @@ void setup()
 {
     struct tm dtw;
     struct tm dtr;
-    uint8_t hour, min, sec;
+    uint8_t hour;
+    uint8_t min;
+    uint8_t sec;
+    uint8_t mday;
+    uint8_t mon;
+    uint16_t year;
+    uint8_t wday;
 
     // Initialize serial port
-    Serial.begin(115200);
     delay(500);
+    Serial.begin(115200);
     while (!Serial) {
         ;
     }
     Serial.println(F("\nErriez DS1302 begin test"));
 
     // Initialize RTC
-    while (!ds1302.begin()) {
-        Serial.println(F("Error: DS1302 not found"));
-        delay(3000);
-    }
+    CHK(rtc.begin() == true);
 
-    // Test oscillator
-    if (ds1302.isRunning()) {
-        ds1302.clockEnable(true);
+    // Test isRunning() / clockEnable()
+    if (!rtc.isRunning()) {
+        CHK(rtc.clockEnable(true));
     }
-    CHK(ds1302.isRunning() == true);
+    CHK(rtc.isRunning() == true);
 
-    // Test epoch write
-    ds1302.setEpoch(EPOCH_TEST);
+    // Test setEpoch()
+    CHK(rtc.setEpoch(EPOCH_TEST) == Success);
     delay(1500);
 
     // Verify epoch struct tm
-    CHK(ds1302.read(&dtr) == Success);
+    CHK(rtc.read(&dtr) == Success);
     CHK(dtr.tm_sec == 31);
     CHK(dtr.tm_min == 20);
     CHK(dtr.tm_hour == 18);
@@ -116,10 +119,10 @@ void setup()
     CHK(dtr.tm_year == 120);
     CHK(dtr.tm_wday == 0);
 
-    // Verify epoch time_t
-    CHK(ds1302.getEpoch() == (EPOCH_TEST + 1));
+    // Verify getEpoch()
+    CHK(rtc.getEpoch() == (EPOCH_TEST + 1));
 
-    // Test write
+    // Test write()
     dtw.tm_hour = 12;
     dtw.tm_min = 34;
     dtw.tm_sec = 56;
@@ -127,10 +130,10 @@ void setup()
     dtw.tm_mon = 1; // 0=January
     dtw.tm_year = 2020-1900;
     dtw.tm_wday = 6; // 0=Sunday
-    ds1302.write(&dtw);
+    CHK(rtc.write(&dtw) == Success);
 
-    // Test read
-    CHK(ds1302.read(&dtr) == Success);
+    // Test read()
+    CHK(rtc.read(&dtr) == Success);
     CHK(dtw.tm_sec == dtr.tm_sec);
     CHK(dtw.tm_min == dtr.tm_min);
     CHK(dtw.tm_hour == dtr.tm_hour);
@@ -139,17 +142,29 @@ void setup()
     CHK(dtw.tm_year == dtr.tm_year);
     CHK(dtw.tm_wday == dtr.tm_wday);
 
-    // Test set time
-    ds1302.setTime(12, 34, 56);
-    CHK(ds1302.getTime(&hour, &min, &sec) == Success);
-    CHK((hour == 12) && (min == 34) && (sec == 56));
+    // Test setTime()
+    CHK(rtc.setTime(12, 34, 56) == Success);
+    delay(1500);
+    CHK(rtc.getTime(&hour, &min, &sec) == Success);
+    CHK((hour == 12) && (min == 34) && (sec == 57));
 
-    // Test set date/time   13:45:09  31 December 2019  Tuesday
-    ds1302.setDateTime(13, 45, 9,  31, 12, 2019,  2);
+    // Test setDateTime()   13:45:09  31 December 2019  Tuesday
+    CHK(rtc.setDateTime(13, 45, 9,  31, 12, 2019,  2) == Success);
+    delay(1500);
 
-    // Verify setDateTime
-    CHK(ds1302.read(&dtr) == Success);
-    CHK(dtr.tm_sec == 9);
+    // Test getDateTime()
+    CHK(rtc.getDateTime(&hour, &min, &sec, &mday, &mon, &year, &wday) == Success);
+    CHK(hour == 13);
+    CHK(min == 45);
+    CHK(sec == 10);
+    CHK(mday == 31);
+    CHK(mon == 12);
+    CHK(year == 2019);
+    CHK(wday == 2);
+
+    // Verify setDateTime() with read()
+    CHK(rtc.read(&dtr) == Success);
+    CHK(dtr.tm_sec == 10);
     CHK(dtr.tm_min == 45);
     CHK(dtr.tm_hour == 13);
     CHK(dtr.tm_mday == 31);

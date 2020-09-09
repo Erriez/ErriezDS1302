@@ -23,7 +23,7 @@
  */
 
 /*!
- * \brief DS1302 RTC read example for Arduino
+ * \brief DS1302 RTC set date/time with struct tm example for Arduino
  * \details
  *    Source:         https://github.com/Erriez/ErriezDS1302
  *    Documentation:  https://erriez.github.io/ErriezDS1302
@@ -51,30 +51,43 @@
 #endif
 
 // Create DS1302 RTC object
-ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+ErriezDS1302 rtc = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 
 void setup()
 {
+    struct tm dt;
+
     // Initialize serial port
     delay(500);
     Serial.begin(115200);
     while (!Serial) {
         ;
     }
-    Serial.println(F("\nErriez DS1302 read example"));
+    Serial.println(F("\nErriez DS1302 RTC Set Date/Time example\n"));
 
     // Initialize RTC
-    while (!ds1302.begin()) {
-        Serial.println(F("Error: DS1302 not found"));
+    while (!rtc.begin()) {
+        Serial.println(F("RTC not found"));
         delay(3000);
     }
 
-    // Enable RTC clock
-    if (!ds1302.isRunning()) {
-        ds1302.clockEnable(true);
-        ds1302.setTime(12, 0, 0);
-        Serial.println(F("DS1302 clock reset"));
+    // Set date and time
+    dt.tm_hour = 12;
+    dt.tm_min = 34;
+    dt.tm_sec = 56;
+    dt.tm_mday = 29;
+    dt.tm_mon = 2-1; // Month: 0..11
+    dt.tm_year = 2020-1900; // Year since 1900
+
+    // Calculate day of the week: 0=Sunday .. 6=Saturday
+    time_t t = mktime(&dt);
+    dt.tm_wday = localtime(&t)->tm_wday;
+
+    // Write date/time
+    while (!rtc.write(&dt)) {
+        Serial.println(F("RTC write failed"));
+        delay(3000);
     }
 }
 
@@ -82,11 +95,13 @@ void loop()
 {
     struct tm dt;
 
-    // Read date/time from RTC
-    ds1302.read(&dt);
-
-    // Print date/time
-    Serial.println(asctime(&dt));
+    // Get date/time
+    if (!rtc.read(&dt)) {
+        Serial.println(F("RTC read failed"));
+    } else {
+        // Print formatted date/time: "Sat Feb 29 12:34:56 2020"
+        Serial.println(asctime(&dt));
+    }
 
     // Wait a second
     delay(1000);
