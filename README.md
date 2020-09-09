@@ -72,13 +72,13 @@ Arduino IDE | File | Examples | Erriez DS1302 RTC:
 #error #error "May work, but not tested on this target"
 #endif
 
-// Create DS1302 RTC object
-ErriezDS1302 ds1302 = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
+// Create RTC object
+ErriezDS1302 rtc = ErriezDS1302(DS1302_CLK_PIN, DS1302_IO_PIN, DS1302_CE_PIN);
 
 void setup()
 {
     // Initialize RTC
-    while (!ds1302.begin()) {
+    while (!rtc.begin()) {
         Serial.println(F("RTC not found"));
         delay(3000);
     }
@@ -89,12 +89,12 @@ void setup()
 
 ```c++
 // Check oscillator status
-if (!ds1302.isRunning()) {
-    // Error: DS1302 RTC oscillator stopped. Date/time cannot be trusted. 
+if (!rtc.isRunning()) {
+    // Error: RTC oscillator stopped. Date/time cannot be trusted. 
     // Set new date/time before reading date/time.
 
     // Enable oscillator
-    ds1302.clockEnable(true);
+    rtc.clockEnable(true);
 }
 ```
 
@@ -102,7 +102,9 @@ if (!ds1302.isRunning()) {
 
 ```c++
 // Write time to RTC
-ds1302.setTime(12, 0, 0);
+if (!rtc.setTime(12, 0, 0)) {
+    // Error: Set time failed
+}
 ```
 
 **Get time**
@@ -113,7 +115,7 @@ uint8_t minute;
 uint8_t second;
 
 // Read time from RTC
-if (!ds1302.getTime(&hour, &minute, &second)) {
+if (!rtc.getTime(&hour, &minute, &second)) {
     // Error: RTC read failed
 }
 ```
@@ -121,13 +123,13 @@ if (!ds1302.getTime(&hour, &minute, &second)) {
 **Set date and time**
 
 ```c++
-// Write RTC date/time: 13:45:09  31 December 2019  2=Tuesday
-if (!ds1302.setDateTime(13, 45, 9,  31, 12, 2019,  2) {
+// Write RTC date/time: 13:45:09  31 December 2019  0=Sunday, 2=Tuesday
+if (!rtc.setDateTime(13, 45, 9,  31, 12, 2019,  2) {
     // Error: RTC write failed
 }
 ```
 
-**Get date/time**
+**Get date and time**
 
 ```c++
 uint8_t hour;
@@ -139,7 +141,7 @@ uint16_t year;
 uint8_t wday;
 
 // Read RTC date/time
-if (!ds1307.getDateTime(&hour, &min, &sec, &mday, &mon, &year, &wday) {
+if (!rtc.getDateTime(&hour, &min, &sec, &mday, &mon, &year, &wday) {
     // Error: RTC read failed
 }
 
@@ -165,7 +167,9 @@ dt.tm_mon = 1; // 0=January
 dt.tm_year = 2020-1900;
 dt.tm_wday = 6; // 0=Sunday
 
-ds1302.write(&dt);
+if (!rtc.write(&dt)) {
+    // Error: RTC Read failed
+}
 ```
 
 **Read date/time struct tm**
@@ -174,7 +178,7 @@ ds1302.write(&dt);
 struct tm dt;
 
 // Read RTC date/time
-if (!ds1307.read(&dt)) {
+if (!rtc.read(&dt)) {
     // Error: RTC read failed
 }
 ```
@@ -185,7 +189,7 @@ if (!ds1307.read(&dt)) {
 time_t t;
 
 // Read Unix epoch UTC from RTC
-if (!ds1307.getEpoch(&t)) {
+if (!rtc.getEpoch(&t)) {
     // Error: RTC read failed
 }
 ```
@@ -194,7 +198,7 @@ if (!ds1307.getEpoch(&t)) {
 
 ```c++
 // Write Unix epoch UTC to RTC
-if (!ds1307.setEpoch(1599416430UL)) {
+if (!rtc.setEpoch(1599416430UL)) {
     // Error: Set epoch failed
 }
 ```
@@ -203,22 +207,22 @@ if (!ds1307.setEpoch(1599416430UL)) {
 
 ```c++
 // Write Byte to RTC RAM
-ds1302.writeByteRAM(0x02, 0xA9);
+rtc.writeByteRAM(0x02, 0xA9);
 
 // Write buffer to RTC RAM
 uint8_t buf[NUM_DS1302_RAM_REGS] = { 0x00 };
-ds1302.writeBufferRAM(buf, sizeof(buf));
+rtc.writeBufferRAM(buf, sizeof(buf));
 ```
 
 **Read from RTC RAM**
 
 ```c++
 // Read byte from RTC RAM
-uint8_t dataByte = ds1302.readByteRAM(0x02);
+uint8_t dataByte = rtc.readByteRAM(0x02);
 
 // Read buffer from RTC RAM
 uint8_t buf[NUM_DS1302_RAM_REGS];
-ds1302.readBufferRAM(buf, sizeof(buf));
+rtc.readBufferRAM(buf, sizeof(buf));
 ```
 
 **Set Trickle Charger**
@@ -227,13 +231,13 @@ Please refer to the datasheet how to configure the trickle charger.
 
 ```c++
 // Disable (default)
-ds1302.writeRegister(DS1302_REG_TC, DS1302_TCS_DISABLE);
+rtc.writeRegister(DS1302_REG_TC, DS1302_TCS_DISABLE);
 
 // Minimum 2 Diodes, 8kOhm
-ds1302.writeRegister(DS1302_REG_TC, 0xAB);
+rtc.writeRegister(DS1302_REG_TC, 0xAB);
 
 // Maximum 1 Diode, 2kOhm
-ds1302.writeRegister(DS1302_REG_TC, 0xA5);
+rtc.writeRegister(DS1302_REG_TC, 0xA5);
 ```
 
 **Set RTC date and time using Python**
@@ -283,6 +287,13 @@ to calculate with date/time and port the application to different platforms. See
 | `isProtected()`                  | Removed                                                      |
 |                                  | `void setDateTime(uint8_t hour, uint8_t min, uint8_t sec, uint8_t mday, uint8_t mon, uint16_t year, uint8_t wday)` |
 |                                  | `void getDateTime(uint8_t *hour, uint8_t *min, uint8_t *sec, uint8_t *mday, uint8_t *mon, uint16_t *year, uint8_t *wday)` |
+| `ErriezDS3231Debug`              | class removed to reduce flash size       |
+
+
+## Library dependencies
+
+* `Wire.h`
+* `Terminal.ino` requires `ErriezSerialTerminal` library.
 
 
 ## Library installation
