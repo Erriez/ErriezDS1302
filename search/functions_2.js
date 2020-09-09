@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['erriezds1302',['ErriezDS1302',['../class_erriez_d_s1302.html#afebc2dfe37010ef7ce4153e543113a69',1,'ErriezDS1302']]]
+  ['dectobcd',['decToBcd',['../class_erriez_d_s1302.html#a7378e25777b22d894bb7169b17dfc040',1,'ErriezDS1302']]]
 ];

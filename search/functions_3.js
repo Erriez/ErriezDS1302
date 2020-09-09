@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['getepoch',['getEpoch',['../class_erriez_d_s1302.html#a27c646475aab12bd293d7c4a22c7273a',1,'ErriezDS1302']]],
-  ['gettime',['getTime',['../class_erriez_d_s1302.html#aaf72f5019c708f28b701bc81d1baa2fa',1,'ErriezDS1302']]]
+  ['erriezds1302',['ErriezDS1302',['../class_erriez_d_s1302.html#afebc2dfe37010ef7ce4153e543113a69',1,'ErriezDS1302']]]
 ];

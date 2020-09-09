@@ -10,8 +10,6 @@ var menudata={children:[
 {text:"File List",url:"files.html"},
 {text:"File Members",url:"globals.html",children:[
 {text:"All",url:"globals.html",children:[
-{text:"d",url:"globals.html#index_d"},
-{text:"n",url:"globals.html#index_n"}]},
+{text:"d",url:"globals.html#index_d"}]},
 {text:"Macros",url:"globals_defs.html",children:[
-{text:"d",url:"globals_defs.html#index_d"},
-{text:"n",url:"globals_defs.html#index_n"}]}]}]}]}
+{text:"d",url:"globals_defs.html#index_d"}]}]}]}]}

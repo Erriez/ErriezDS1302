@@ -5,7 +5,6 @@ var searchData=
   ['ds1302_5facb_5fram',['DS1302_ACB_RAM',['../_erriez_d_s1302_8h.html#af485f398951fbc59758449c781f68f62',1,'ErriezDS1302.h']]],
   ['ds1302_5facb_5fread',['DS1302_ACB_READ',['../_erriez_d_s1302_8h.html#ab3fc3ff4f2c718a5b90cc0e0ba38b263',1,'ErriezDS1302.h']]],
   ['ds1302_5facb_5fwrite',['DS1302_ACB_WRITE',['../_erriez_d_s1302_8h.html#a3a87988056dd4beb41658660714ad7f8',1,'ErriezDS1302.h']]],
-  ['ds1302_5fbit_5fch',['DS1302_BIT_CH',['../_erriez_d_s1302_8h.html#a2557fffeeee25e37869fe980bdc79c14',1,'ErriezDS1302.h']]],
   ['ds1302_5fbit_5fread',['DS1302_BIT_READ',['../_erriez_d_s1302_8h.html#acdb7ac544a140f27b5f7deb0be22e449',1,'ErriezDS1302.h']]],
   ['ds1302_5fbit_5fwp',['DS1302_BIT_WP',['../_erriez_d_s1302_8h.html#a4ebfcf5997c8387152ad790277bdc8b7',1,'ErriezDS1302.h']]],
   ['ds1302_5fce_5fhigh',['DS1302_CE_HIGH',['../_erriez_d_s1302_8h.html#aa4478471275f0bf5003081d07e9dcb66',1,'ErriezDS1302.h']]],
@@ -29,6 +28,7 @@ var searchData=
   ['ds1302_5fio_5flow',['DS1302_IO_LOW',['../_erriez_d_s1302_8h.html#af3503fca121bd421de3d73627e76b15a',1,'ErriezDS1302.h']]],
   ['ds1302_5fio_5foutput',['DS1302_IO_OUTPUT',['../_erriez_d_s1302_8h.html#a04aad82523a12d51c38a2fd2aa973da9',1,'ErriezDS1302.h']]],
   ['ds1302_5fio_5fread',['DS1302_IO_READ',['../_erriez_d_s1302_8h.html#aa0d42270d5f6d1dd200902613deceecf',1,'ErriezDS1302.h']]],
+  ['ds1302_5fnum_5fclock_5fregs',['DS1302_NUM_CLOCK_REGS',['../_erriez_d_s1302_8h.html#a8c5280c08cec5bac833dcbade682ee41',1,'ErriezDS1302.h']]],
   ['ds1302_5fpin_5fdelay',['DS1302_PIN_DELAY',['../_erriez_d_s1302_8h.html#ad3d95bae6f01464ed93a059a70705db8',1,'ErriezDS1302.h']]],
   ['ds1302_5freg_5fday_5fmonth',['DS1302_REG_DAY_MONTH',['../_erriez_d_s1302_8h.html#a9b47355eeaf937ffd85c3e1af8df75de',1,'ErriezDS1302.h']]],
   ['ds1302_5freg_5fday_5fweek',['DS1302_REG_DAY_WEEK',['../_erriez_d_s1302_8h.html#a2da880f573eb735e903f9af11384bf25',1,'ErriezDS1302.h']]],
@@ -39,5 +39,6 @@ var searchData=
   ['ds1302_5freg_5ftc',['DS1302_REG_TC',['../_erriez_d_s1302_8h.html#a8bf70caf0ae83ebcaa403985baca25ac',1,'ErriezDS1302.h']]],
   ['ds1302_5freg_5fwp',['DS1302_REG_WP',['../_erriez_d_s1302_8h.html#a725b6ced0d0196edd4823f01c97d65d9',1,'ErriezDS1302.h']]],
   ['ds1302_5freg_5fyear',['DS1302_REG_YEAR',['../_erriez_d_s1302_8h.html#a2e477abad698a9759156d26b42ec2540',1,'ErriezDS1302.h']]],
+  ['ds1302_5fsec_5fch',['DS1302_SEC_CH',['../_erriez_d_s1302_8h.html#a4f940b00ffc93ccd77541b09b36897fa',1,'ErriezDS1302.h']]],
   ['ds1302_5ftcs_5fdisable',['DS1302_TCS_DISABLE',['../_erriez_d_s1302_8h.html#a37d3f4ea25589d2b1d273e7fce5336c1',1,'ErriezDS1302.h']]]
 ];

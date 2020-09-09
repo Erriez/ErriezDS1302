@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['num_5fds1302_5fram_5fregs',['NUM_DS1302_RAM_REGS',['../_erriez_d_s1302_8h.html#ad9d934880f3379334d3e8659852f21ad',1,'ErriezDS1302.h']]]
+  ['read',['read',['../class_erriez_d_s1302.html#af66b41091b5f8e121cb787b869898ee6',1,'ErriezDS1302']]],
+  ['readbuffer',['readBuffer',['../class_erriez_d_s1302.html#a9025dccaec2ddb17c23f58036d95e8a7',1,'ErriezDS1302']]],
+  ['readbufferram',['readBufferRAM',['../class_erriez_d_s1302.html#ab645cebdca18d961e8a28c408f14dbf3',1,'ErriezDS1302']]],
+  ['readbyteram',['readByteRAM',['../class_erriez_d_s1302.html#ada01e48cd1553402b03cb30149c4aedf',1,'ErriezDS1302']]],
+  ['readregister',['readRegister',['../class_erriez_d_s1302.html#a63f024d4894b4c4915149016bc3ecf41',1,'ErriezDS1302']]]
 ];

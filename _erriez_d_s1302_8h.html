@@ -89,7 +89,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="_erriez_d_s1302_8h__dep__incl.png" border="0" usemap="#src_2_erriez_d_s1302_8hdep" alt=""/></div>
 <map name="src_2_erriez_d_s1302_8hdep" id="src_2_erriez_d_s1302_8hdep">
-<area shape="rect" id="node2" href="_erriez_d_s1302_8cpp_source.html" title="src/ErriezDS1302.cpp" alt="" coords="5,80,164,107"/>
+<area shape="rect" id="node2" href="_erriez_d_s1302_8cpp.html" title="DS1302 RTC library for Arduino. " alt="" coords="5,80,164,107"/>
 </map>
 </div>
 </div>
@@ -189,13 +189,16 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a8bf70caf0ae83ebcaa403985baca25ac">DS1302_REG_TC</a>&#160;&#160;&#160;0x08</td></tr>
 <tr class="memdesc:a8bf70caf0ae83ebcaa403985baca25ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tickle Charger register. <br /></td></tr>
 <tr class="separator:a8bf70caf0ae83ebcaa403985baca25ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9d934880f3379334d3e8659852f21ad"><td class="memItemLeft" align="right" valign="top"><a id="ad9d934880f3379334d3e8659852f21ad"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#ad9d934880f3379334d3e8659852f21ad">NUM_DS1302_RAM_REGS</a>&#160;&#160;&#160;31</td></tr>
-<tr class="memdesc:ad9d934880f3379334d3e8659852f21ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 number of RAM registers. <br /></td></tr>
-<tr class="separator:ad9d934880f3379334d3e8659852f21ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2557fffeeee25e37869fe980bdc79c14"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a2557fffeeee25e37869fe980bdc79c14">DS1302_BIT_CH</a>&#160;&#160;&#160;7</td></tr>
-<tr class="memdesc:a2557fffeeee25e37869fe980bdc79c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 register bit defines.  <a href="#a2557fffeeee25e37869fe980bdc79c14">More...</a><br /></td></tr>
-<tr class="separator:a2557fffeeee25e37869fe980bdc79c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c5280c08cec5bac833dcbade682ee41"><td class="memItemLeft" align="right" valign="top"><a id="a8c5280c08cec5bac833dcbade682ee41"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a8c5280c08cec5bac833dcbade682ee41">DS1302_NUM_CLOCK_REGS</a>&#160;&#160;&#160;7</td></tr>
+<tr class="memdesc:a8c5280c08cec5bac833dcbade682ee41"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 number of RAM registers. <br /></td></tr>
+<tr class="separator:a8c5280c08cec5bac833dcbade682ee41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a3b2006b25a9c3cce4212d0facf77c1"><td class="memItemLeft" align="right" valign="top"><a id="a9a3b2006b25a9c3cce4212d0facf77c1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DS1302_NUM_RAM_REGS</b>&#160;&#160;&#160;31</td></tr>
+<tr class="separator:a9a3b2006b25a9c3cce4212d0facf77c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f940b00ffc93ccd77541b09b36897fa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a4f940b00ffc93ccd77541b09b36897fa">DS1302_SEC_CH</a>&#160;&#160;&#160;7</td></tr>
+<tr class="memdesc:a4f940b00ffc93ccd77541b09b36897fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">DS1302 register bit defines.  <a href="#a4f940b00ffc93ccd77541b09b36897fa">More...</a><br /></td></tr>
+<tr class="separator:a4f940b00ffc93ccd77541b09b36897fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ebfcf5997c8387152ad790277bdc8b7"><td class="memItemLeft" align="right" valign="top"><a id="a4ebfcf5997c8387152ad790277bdc8b7"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_erriez_d_s1302_8h.html#a4ebfcf5997c8387152ad790277bdc8b7">DS1302_BIT_WP</a>&#160;&#160;&#160;7</td></tr>
 <tr class="memdesc:a4ebfcf5997c8387152ad790277bdc8b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write protect bit. <br /></td></tr>
@@ -290,25 +293,6 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a2557fffeeee25e37869fe980bdc79c14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2557fffeeee25e37869fe980bdc79c14">&#9670;&nbsp;</a></span>DS1302_BIT_CH</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DS1302_BIT_CH&#160;&#160;&#160;7</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>DS1302 register bit defines. </p>
-<p>Clock halt bit </p>
-
-<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00078">78</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
-
-</div>
-</div>
 <a id="ad90def0d6680961a3ecfa479da93c8a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad90def0d6680961a3ecfa479da93c8a6">&#9670;&nbsp;</a></span>DS1302_REG_SECONDS</h2>
 
@@ -325,6 +309,25 @@ Macros</h2></td></tr>
 <p>Seconds register </p>
 
 <p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00064">64</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
+
+</div>
+</div>
+<a id="a4f940b00ffc93ccd77541b09b36897fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f940b00ffc93ccd77541b09b36897fa">&#9670;&nbsp;</a></span>DS1302_SEC_CH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DS1302_SEC_CH&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>DS1302 register bit defines. </p>
+<p>Clock halt bit in seconds register </p>
+
+<p class="definition">Definition at line <a class="el" href="_erriez_d_s1302_8h_source.html#l00079">79</a> of file <a class="el" href="_erriez_d_s1302_8h_source.html">ErriezDS1302.h</a>.</p>
 
 </div>
 </div>

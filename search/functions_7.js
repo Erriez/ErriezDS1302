@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['write',['write',['../class_erriez_d_s1302.html#aae5ea1f8333e59891efc1a033f52a1b1',1,'ErriezDS1302']]],
-  ['writebufferram',['writeBufferRAM',['../class_erriez_d_s1302.html#a5b6685824d1f143886fd6f75734560ee',1,'ErriezDS1302']]],
-  ['writebyteram',['writeByteRAM',['../class_erriez_d_s1302.html#a4be79f330b10bdf6ad14c129475c7430',1,'ErriezDS1302']]],
-  ['writeregister',['writeRegister',['../class_erriez_d_s1302.html#a6bc49bb09705fe9d99d94c5ea8134fbb',1,'ErriezDS1302']]]
+  ['setdatetime',['setDateTime',['../class_erriez_d_s1302.html#aee75c5015032f7a60dffb0b42083a417',1,'ErriezDS1302']]],
+  ['setepoch',['setEpoch',['../class_erriez_d_s1302.html#abb65063ce0e220266a011d985ef5f676',1,'ErriezDS1302']]],
+  ['settime',['setTime',['../class_erriez_d_s1302.html#a6114b4367dab23a98ec3c7314112da32',1,'ErriezDS1302']]]
 ];
